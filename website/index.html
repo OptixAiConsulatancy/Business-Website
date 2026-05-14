@@ -10,10 +10,13 @@
 </head>
 <body>
 
+  <!-- SKIP LINK (accessibility) -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <span class="logo">Automately</span>
+      <a href="#main" class="logo" aria-label="Automately home">Automately</a>
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
         <li><a href="#process">How it works</a></li>
@@ -25,95 +28,136 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="main" aria-labelledby="hero-heading">
     <div class="hero-inner">
       <div class="badge">Based in Gold Coast · Built for Australian SMBs</div>
-      <h1>Your business runs.<br/>We make it <span class="grad">run itself.</span></h1>
-      <p class="hero-sub">We build AI automations that save your team hours every week — lead follow-ups, document processing, reporting, and more. No fluff. Just results.</p>
+      <h1 id="hero-heading">Your business runs.<br/>We make it <span class="grad">run itself.</span></h1>
+      <p class="hero-sub">We map your busiest manual processes, build AI automations around them, and hand you back hours every week. Lead follow-ups, document processing, reporting — running without your team touching them.</p>
       <div class="hero-cta">
         <a href="#contact" class="btn-primary">Book a free discovery call</a>
-        <a href="#process" class="btn-ghost">See how it works →</a>
+        <a href="#process" class="btn-ghost">See how it works <span aria-hidden="true">→</span></a>
       </div>
     </div>
-    <div class="hero-grid"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
   </section>
 
+  <!-- STATS BAR -->
+  <div class="stats-bar" aria-label="Key facts">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value">2–4 wks</div>
+        <div class="stat-label">From discovery call to live</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">Free</div>
+        <div class="stat-label">First discovery call, no obligation</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">No lock-in</div>
+        <div class="stat-label">Cancel your retainer anytime</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">Local</div>
+        <div class="stat-label">Gold Coast based, QLD focused</div>
+      </div>
+    </div>
+  </div>
+
   <!-- SERVICES -->
-  <section class="section" id="services">
+  <section class="section" id="services" aria-labelledby="services-heading">
     <div class="inner">
       <p class="label">What we build</p>
-      <h2>Automations that pay for themselves</h2>
+      <h2 id="services-heading">Automations that pay for themselves</h2>
       <div class="cards">
+
         <div class="card">
-          <div class="card-icon">⚡</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
           <h3>Lead Follow-up Agents</h3>
-          <p>Automatically respond to new enquiries, qualify leads, and book appointments — while you sleep.</p>
+          <p>A lead comes in at 11pm. By morning it is qualified, followed up, and booked. Your team wakes up to a calendar that filled itself.</p>
         </div>
+
         <div class="card">
-          <div class="card-icon">📄</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
           <h3>Document Processing</h3>
-          <p>Extract data from invoices, quotes, and forms. Push it straight into your CRM or spreadsheet.</p>
+          <p>Invoices, quotes, and intake forms get read, extracted, and pushed straight into your CRM — without anyone opening a single file.</p>
         </div>
+
         <div class="card">
-          <div class="card-icon">🤖</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+          </div>
           <h3>Customer Support Bots</h3>
-          <p>Handle FAQs and triage tickets 24/7. Escalate to your team only when it actually matters.</p>
+          <p>Common questions get answered the moment they are asked. Urgent issues escalate to your team. Everyone else waits for nothing.</p>
         </div>
+
         <div class="card">
-          <div class="card-icon">📊</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          </div>
           <h3>Automated Reporting</h3>
-          <p>Pull data from every source, generate reports weekly — delivered to your inbox automatically.</p>
+          <p>Every Monday, a report lands in your inbox. Data pulled from every source, formatted the way you want it. Nothing to open, nothing to update.</p>
         </div>
+
         <div class="card">
-          <div class="card-icon">🔄</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
           <h3>Onboarding Workflows</h3>
-          <p>New client or new staff? Automate the entire onboarding sequence so nothing gets missed.</p>
+          <p>New client signed? New staff member started? Every task, email, and document goes out on schedule. No one needs to remember a thing.</p>
         </div>
+
         <div class="card">
-          <div class="card-icon">📱</div>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
           <h3>Content Pipelines</h3>
-          <p>Draft, schedule, and repurpose content across every channel without lifting a finger.</p>
+          <p>Turn one piece of content into a week of posts. Draft, schedule, and repurpose across every channel without your team touching the keyboard.</p>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- PROCESS -->
-  <section class="section section-dark" id="process">
+  <section class="section section-dark" id="process" aria-labelledby="process-heading">
     <div class="inner">
       <p class="label">How it works</p>
-      <h2>From problem to running in weeks</h2>
+      <h2 id="process-heading">From problem to running in weeks</h2>
       <div class="process-steps">
         <div class="step">
           <span class="step-num">01</span>
           <h3>Prospect</h3>
-          <p>We reach out or you come to us. Either way, it starts with a conversation.</p>
+          <p>We reach out, or you come to us. Either way it starts with a conversation.</p>
         </div>
-        <div class="step-arrow">→</div>
+        <div class="step-arrow" aria-hidden="true">→</div>
         <div class="step">
           <span class="step-num">02</span>
           <h3>Discovery</h3>
-          <p>We ask the right questions to map your current processes end-to-end.</p>
+          <p>We ask the right questions to map your current processes end to end.</p>
         </div>
-        <div class="step-arrow">→</div>
+        <div class="step-arrow" aria-hidden="true">→</div>
         <div class="step">
           <span class="step-num">03</span>
           <h3>Diagnose</h3>
           <p>We pinpoint the highest-pain, highest-ROI automation opportunities.</p>
         </div>
-        <div class="step-arrow">→</div>
+        <div class="step-arrow" aria-hidden="true">→</div>
         <div class="step">
           <span class="step-num">04</span>
           <h3>Build</h3>
-          <p>We build it using the best AI tools for your exact use case.</p>
+          <p>We build it using the right tool for your exact situation.</p>
         </div>
-        <div class="step-arrow">→</div>
+        <div class="step-arrow" aria-hidden="true">→</div>
         <div class="step">
           <span class="step-num">05</span>
           <h3>Deliver</h3>
           <p>We deploy, train your staff, and hand it over fully documented.</p>
         </div>
-        <div class="step-arrow">→</div>
+        <div class="step-arrow" aria-hidden="true">→</div>
         <div class="step">
           <span class="step-num">06</span>
           <h3>Retain</h3>
@@ -124,75 +168,125 @@
   </section>
 
   <!-- INDUSTRIES -->
-  <section class="section" id="industries">
+  <section class="section" id="industries" aria-labelledby="industries-heading">
     <div class="inner">
       <p class="label">Who we work with</p>
-      <h2>Built for Gold Coast businesses</h2>
+      <h2 id="industries-heading">Built for Gold Coast businesses</h2>
       <div class="industries-grid">
+
         <div class="industry">
-          <span>🔧</span>
+          <div class="industry-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
           <div>
-            <h4>Trades & Construction</h4>
+            <h4>Trades &amp; Construction</h4>
             <p>Quoting, job scheduling, follow-ups, compliance docs</p>
           </div>
         </div>
+
         <div class="industry">
-          <span>🏠</span>
+          <div class="industry-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+          </div>
           <div>
             <h4>Real Estate</h4>
             <p>Lead nurturing, listing descriptions, tenant comms</p>
           </div>
         </div>
+
         <div class="industry">
-          <span>🏥</span>
+          <div class="industry-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
           <div>
             <h4>Allied Health</h4>
             <p>Appointment reminders, intake forms, referral letters</p>
           </div>
         </div>
+
         <div class="industry">
-          <span>🌴</span>
+          <div class="industry-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
           <div>
-            <h4>Hospitality & Tourism</h4>
+            <h4>Hospitality &amp; Tourism</h4>
             <p>Booking follow-ups, review responses, staff rostering</p>
           </div>
         </div>
+
         <div class="industry">
-          <span>💼</span>
+          <div class="industry-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
           <div>
             <h4>Professional Services</h4>
             <p>Document prep, client comms, automated reporting</p>
           </div>
         </div>
+
         <div class="industry">
-          <span>📦</span>
+          <div class="industry-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
           <div>
-            <h4>Retail & eCommerce</h4>
+            <h4>Retail &amp; eCommerce</h4>
             <p>Order workflows, customer support, inventory alerts</p>
           </div>
         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section section-dark" id="results" aria-labelledby="results-heading">
+    <div class="inner">
+      <p class="label">Client outcomes</p>
+      <h2 id="results-heading">What this looks like in practice</h2>
+      <div class="results-grid">
+
+        <div class="result-card">
+          <div class="result-metric">12 hours freed per week</div>
+          <p>An allied health clinic runs intake forms, appointment reminders, and referral letters without admin staff touching them. Patient time is up. Paper time is gone.</p>
+          <div class="result-type">Allied Health · Workflow automation</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-metric">Zero missed follow-ups</div>
+          <p>A trades business sends every quote a follow-up sequence without anyone setting a reminder. Jobs that used to fall through the cracks now close.</p>
+          <div class="result-type">Trades &amp; Construction · Lead nurturing</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-metric">Hours to minutes</div>
+          <p>A real estate agency cut new enquiry response time from hours to seconds. Leads get qualified and a calendar link before the agent opens their laptop.</p>
+          <div class="result-type">Real Estate · Lead follow-up agent</div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- PRICING -->
-  <section class="section section-dark" id="pricing">
+  <section class="section" id="pricing" aria-labelledby="pricing-heading">
     <div class="inner">
       <p class="label">Pricing</p>
-      <h2>Simple, transparent pricing</h2>
+      <h2 id="pricing-heading">Simple, transparent pricing</h2>
       <div class="pricing-cards">
+
         <div class="pricing-card">
           <h3>Project</h3>
           <div class="price">$1,500<span> – $10,000+</span></div>
           <p>One-off fee to scope, build, and deploy your automation.</p>
           <ul>
-            <li>Discovery & diagnosis included</li>
-            <li>Full build & testing</li>
-            <li>Staff training & handover</li>
+            <li>Discovery &amp; diagnosis included</li>
+            <li>Full build &amp; testing</li>
+            <li>Staff training &amp; handover</li>
             <li>30 days post-launch support</li>
           </ul>
           <a href="#contact" class="btn-primary">Get a quote</a>
         </div>
+
         <div class="pricing-card pricing-featured">
           <div class="popular-tag">Most popular</div>
           <h3>Project + Retainer</h3>
@@ -200,24 +294,61 @@
           <p>Build it once, then keep it running and improving every month.</p>
           <ul>
             <li>Everything in Project</li>
-            <li>Monthly maintenance & updates</li>
+            <li>Monthly maintenance &amp; updates</li>
             <li>Performance reporting</li>
             <li>Priority support</li>
             <li>Ongoing improvements</li>
           </ul>
-          <a href="#contact" class="btn-primary">Get started</a>
+          <a href="#contact" class="btn-primary">Book a free call</a>
         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-dark" id="faq" aria-labelledby="faq-heading">
+    <div class="inner">
+      <p class="label">Common questions</p>
+      <h2 id="faq-heading">Before you book a call</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <p class="faq-q">How long does it take to get started?</p>
+          <p class="faq-a">Book a free discovery call and we scope your biggest automation opportunities in 30 minutes. Most builds go live within 2–4 weeks from that call.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">Do we need to replace our existing tools?</p>
+          <p class="faq-a">No. We build on top of what you already use — your CRM, your scheduling software, your inbox. Nothing gets ripped out.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">What happens if something breaks?</p>
+          <p class="faq-a">Retainer clients get priority monitoring and support. If an automation fails, we fix it before you notice. One-off builds include 30 days of post-launch support.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">How is the work priced?</p>
+          <p class="faq-a">Every build is scoped and quoted before we start. You know the cost before we write a line of code. Retainer clients pay a flat monthly fee with no surprises.</p>
+        </div>
+
+        <div class="faq-item">
+          <p class="faq-q">Is AI automation just for big companies?</p>
+          <p class="faq-a">The businesses that benefit most are mid-sized teams who are too busy to keep working manually but not big enough to hire dedicated operations staff. That is exactly who we build for.</p>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="section" id="contact">
+  <section class="section" id="contact" aria-labelledby="contact-heading">
     <div class="inner inner-center">
       <p class="label">Get in touch</p>
-      <h2>Ready to reclaim your time?</h2>
-      <p class="hero-sub">Book a free 30-minute discovery call. We'll map out exactly where automation can save you the most time — no obligation.</p>
-      <a href="mailto:hello@automately.com.au" class="btn-primary">Book a free call →</a>
+      <h2 id="contact-heading">Ready to reclaim your time?</h2>
+      <p class="hero-sub">Book a free 30-minute discovery call. We map out exactly where automation saves you the most time — no obligation, no pitch deck.</p>
+      <a href="mailto:hello@automately.com.au" class="btn-primary">Book a free call <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
