@@ -330,6 +330,12 @@
     const total = cards.length;
     let current = 0;
 
+    function setWidths() {
+      const w = track.parentElement.offsetWidth;
+      cards.forEach(c => { c.style.width = w + 'px'; c.style.minWidth = w + 'px'; });
+      track.style.transform = `translateX(-${current * w}px)`;
+    }
+
     for (let i = 0; i < total; i++) {
       const d = document.createElement('div');
       d.className = 'rev-dot' + (i === 0 ? ' active' : '');
@@ -344,6 +350,8 @@
       dotsContainer.querySelectorAll('.rev-dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
 
+    setWidths();
+    window.addEventListener('resize', setWidths);
     document.getElementById('revPrev').onclick = () => goTo(current - 1);
     document.getElementById('revNext').onclick = () => goTo(current + 1);
     setInterval(() => goTo(current + 1), 7000);
