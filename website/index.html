@@ -327,8 +327,7 @@
     const track = document.getElementById('reviewsTrack');
     const dotsContainer = document.getElementById('revDots');
     const cards = track.querySelectorAll('.review-card');
-    const perPage = window.innerWidth < 700 ? 1 : 3;
-    const total = Math.ceil(cards.length / perPage);
+    const total = cards.length;
     let current = 0;
 
     for (let i = 0; i < total; i++) {
@@ -340,14 +339,13 @@
 
     function goTo(n) {
       current = (n + total) % total;
-      const cardWidth = cards[0].offsetWidth + 24;
-      track.style.transform = `translateX(-${current * perPage * cardWidth}px)`;
+      track.style.transform = `translateX(-${current * 100}%)`;
       dotsContainer.querySelectorAll('.rev-dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
 
     document.getElementById('revPrev').onclick = () => goTo(current - 1);
     document.getElementById('revNext').onclick = () => goTo(current + 1);
-    setInterval(() => goTo(current + 1), 5000);
+    setInterval(() => goTo(current + 1), 7000);
   </script>
 </body>
 </html>
