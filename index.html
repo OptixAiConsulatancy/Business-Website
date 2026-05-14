@@ -315,7 +315,58 @@
 
   <!-- FOOTER -->
 
-  <footer>
+  <!-- CONTACT FORM -->
+  <section class="section" id="contact-form">
+    <div class="inner" style="max-width:700px">
+      <p class="label">Get in touch</p>
+      <h2>Tell us about your business</h2>
+      <p class="hero-sub" style="text-align:left;margin:0 0 2.5rem;">Fill out the form below and we'll get back to you within 24 hours.</p>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full name</label>
+            <input type="text" placeholder="John Smith" required />
+          </div>
+          <div class="form-group">
+            <label>Business name</label>
+            <input type="text" placeholder="Smith Plumbing Co." required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email address</label>
+            <input type="email" placeholder="john@smithplumbing.com.au" required />
+          </div>
+          <div class="form-group">
+            <label>Phone number</label>
+            <input type="tel" placeholder="04XX XXX XXX" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Industry</label>
+          <select required>
+            <option value="" disabled selected>Select your industry</option>
+            <option>Trades & Construction</option>
+            <option>Real Estate</option>
+            <option>Allied Health</option>
+            <option>Hospitality & Tourism</option>
+            <option>Professional Services</option>
+            <option>Retail & eCommerce</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>What's your biggest time waster right now?</label>
+          <textarea placeholder="e.g. chasing leads, manually entering data, following up on invoices..." rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:1rem;padding:1rem;">Book a free discovery call →</button>
+        <p class="form-note">No spam. We'll only use your details to get back to you about your enquiry.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+
     <div class="footer-inner">
       <span class="logo">Optix</span>
       <p>Gold Coast, Queensland · Australia</p>
@@ -355,6 +406,15 @@
     document.getElementById('revPrev').onclick = () => goTo(current - 1);
     document.getElementById('revNext').onclick = () => goTo(current + 1);
     setInterval(() => goTo(current + 1), 7000);
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Sent! We\'ll be in touch within 24 hours.';
+      btn.style.background = '#4ade80';
+      btn.style.color = '#080808';
+      btn.disabled = true;
+    }
   </script>
 </body>
 </html>
