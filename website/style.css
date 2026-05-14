@@ -44,8 +44,9 @@ nav {
 }
 .logo {
   font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: var(--text);
 }
 .nav-links {
