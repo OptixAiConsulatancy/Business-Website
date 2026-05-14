@@ -339,7 +339,8 @@
 
     function goTo(n) {
       current = (n + total) % total;
-      track.style.transform = `translateX(-${current * 100}%)`;
+      const w = track.parentElement.offsetWidth;
+      track.style.transform = `translateX(-${current * w}px)`;
       dotsContainer.querySelectorAll('.rev-dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
 
