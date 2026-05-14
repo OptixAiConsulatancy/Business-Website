@@ -24,6 +24,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* NAV */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -74,6 +75,7 @@ nav {
 }
 .btn-nav:hover { opacity: 0.85; }
 
+/* HERO */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -167,6 +169,7 @@ h1 {
 }
 .btn-ghost:hover { color: var(--text); }
 
+/* SECTIONS */
 .section { padding: 7rem 2rem; }
 .section-dark { background: var(--bg2); }
 .inner {
@@ -191,6 +194,7 @@ h2 {
   margin-bottom: 3rem;
 }
 
+/* CARDS */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -216,6 +220,7 @@ h2 {
 }
 .card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
 
+/* PROCESS */
 .process-steps {
   display: flex;
   align-items: flex-start;
@@ -251,6 +256,7 @@ h2 {
   flex-shrink: 0;
 }
 
+/* INDUSTRIES */
 .industries-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -275,6 +281,7 @@ h2 {
 }
 .industry p { font-size: 0.85rem; color: var(--muted); }
 
+/* PRICING */
 .pricing-cards {
   display: flex;
   gap: 1.5rem;
@@ -352,6 +359,7 @@ h2 {
 }
 .pricing-card .btn-primary { width: 100%; text-align: center; }
 
+/* FOOTER */
 footer {
   border-top: 1px solid var(--border);
   padding: 3rem 2rem;
@@ -368,6 +376,7 @@ footer {
 .footer-inner p { font-size: 0.85rem; color: var(--muted); }
 .footer-copy { font-size: 0.78rem; }
 
+/* RESPONSIVE */
 @media (max-width: 700px) {
   .nav-links { display: none; }
   .process-steps { flex-direction: column; }
