@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Persistent Business Context
+
+**IMPORTANT**: At the start of every session, read `.agents/product-marketing-context.md` and keep that context in mind for all tasks. This is the source of truth for the business being built in this repo. If the user shares new information about the business, suggest updating that file so it persists.
+
 Guidelines for AI agents working in this repository.
 
 ## Repository Overview
