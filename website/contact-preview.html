@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Section Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080808; --bg2: #0f0f0f; --surface: #141414;
+      --border: rgba(255,255,255,0.07); --text: #f0f0f0;
+      --muted: #888; --accent: #7c6dfa; --accent2: #a78bfa;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg2);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      padding: 60px 20px;
+    }
+    .label {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700; letter-spacing: -0.025em;
+      line-height: 1.2; margin-bottom: 3rem;
+    }
+
+    /* CONTACT CARD */
+    .contact-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      overflow: hidden;
+    }
+    .contact-left {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .contact-left h3 {
+      font-size: 1.6rem; font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .contact-left .tagline {
+      font-size: 0.92rem; color: var(--muted); line-height: 1.7;
+      font-style: italic;
+    }
+    .contact-detail { display: flex; flex-direction: column; gap: 0.3rem; }
+    .contact-detail span { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-detail a { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+    .contact-detail a:hover { color: var(--accent); }
+    .location { font-size: 0.85rem; color: var(--muted); }
+
+    .contact-right { padding: 3rem 2.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.82rem; font-weight: 500; color: var(--text); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--muted); }
+    .form-group select option { background: var(--bg); }
+    .form-group textarea { resize: vertical; }
+    .btn-submit {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover { opacity: 0.85; }
+    .form-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 0.75rem; }
+  </style>
+</head>
+<body>
+
+  <p class="label" style="text-align:center">Preview only</p>
+  <h2 style="text-align:center;margin-bottom:2rem">Contact Section</h2>
+
+  <div class="contact-card">
+    <div class="contact-left">
+      <h3>Get in touch</h3>
+      <p class="tagline">"Not sure if automation is right for your business? Send us a message — we'll be straight with you."</p>
+      <div class="contact-detail">
+        <span>Email</span>
+        <a href="#">hello@optix.com.au</a>
+      </div>
+      <p class="location">Based in Gold Coast, Queensland · Australia</p>
+    </div>
+    <div class="contact-right">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full name</label>
+          <input type="text" placeholder="John Smith" />
+        </div>
+        <div class="form-group">
+          <label>Business name</label>
+          <input type="text" placeholder="Smith Plumbing Co." />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" placeholder="john@smithplumbing.com.au" />
+      </div>
+      <div class="form-group">
+        <label>Industry</label>
+        <select>
+          <option value="" disabled selected>Select your industry</option>
+          <option>Trades & Construction</option>
+          <option>Real Estate</option>
+          <option>Allied Health</option>
+          <option>Hospitality & Tourism</option>
+          <option>Professional Services</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>What's your biggest time waster right now?</label>
+        <textarea rows="3" placeholder="e.g. chasing leads, manually entering data, following up on invoices..."></textarea>
+      </div>
+      <button class="btn-submit">Book a free discovery call →</button>
+      <p class="form-note">No spam. We'll only use your details to respond to your enquiry.</p>
+    </div>
+  </div>
+
+</body>
+</html>
