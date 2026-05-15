@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>9 — Gradient Menu</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a0a0a;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  .label {
+    color: rgba(255,255,255,0.25);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* ── Menu ── */
+  .menu {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .item {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1),
+                box-shadow 0.5s ease;
+    overflow: hidden;
+  }
+
+  .item:hover {
+    width: 180px;
+    box-shadow: none;
+  }
+
+  /* gradient overlay */
+  .item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(45deg, var(--from), var(--to));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .item:hover::before { opacity: 1; }
+
+  /* glow */
+  .item::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0; right: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(45deg, var(--from), var(--to));
+    filter: blur(15px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s ease;
+  }
+  .item:hover::after { opacity: 0.5; }
+
+  /* icon */
+  .icon {
+    position: relative;
+    z-index: 1;
+    font-size: 1.4rem;
+    color: #6b7280;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .item:hover .icon {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  /* text */
+  .text {
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.3s 0.15s ease, opacity 0.3s 0.15s ease;
+  }
+  .item:hover .text {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  /* colour themes */
+  .item-1 { --from: #a955ff; --to: #ea51ff; }
+  .item-2 { --from: #56CCF2; --to: #2F80ED; }
+  .item-3 { --from: #FF9966; --to: #FF5E62; }
+  .item-4 { --from: #80FF72; --to: #7EE8FA; }
+  .item-5 { --from: #ffa9c6; --to: #f434e2; }
+
+  /* ── SVG icons ── */
+  svg { width: 1.5rem; height: 1.5rem; stroke: currentColor; fill: none;
+        stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* nav example label */
+  .section-title {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .back { position: fixed; top: 1.5rem; left: 1.5rem; color: rgba(255,255,255,0.3);
+          font-size: 0.82rem; text-decoration: none; letter-spacing: 0.06em; z-index: 200; }
+  .back:hover { color: #fff; }
+  .hint { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+          color: rgba(255,255,255,0.2); font-size: 0.75rem; letter-spacing: 0.08em; pointer-events: none; }
+</style>
+</head>
+<body>
+<script>if (sessionStorage.getItem('anim_auth') !== '1485') { location.href = 'index.html'; }</script>
+<a class="back" href="index.html">← Back</a>
+
+<p class="section-title">Gradient Expand Menu</p>
+
+<nav class="menu">
+
+  <!-- Home -->
+  <div class="item item-1">
+    <span class="icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    </span>
+    <span class="text">Home</span>
+  </div>
+
+  <!-- Video -->
+  <div class="item item-2">
+    <span class="icon">
+      <svg viewBox="0 0 24 24"><rect x="2" y="6" width="15" height="13" rx="2"/><path d="M17 10l5-3v10l-5-3V10z"/></svg>
+    </span>
+    <span class="text">Video</span>
+  </div>
+
+  <!-- Photo -->
+  <div class="item item-3">
+    <span class="icon">
+      <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+    </span>
+    <span class="text">Photo</span>
+  </div>
+
+  <!-- Share -->
+  <div class="item item-4">
+    <span class="icon">
+      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+    </span>
+    <span class="text">Share</span>
+  </div>
+
+  <!-- Like -->
+  <div class="item item-5">
+    <span class="icon">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    </span>
+    <span class="text">Like</span>
+  </div>
+
+</nav>
+
+<p class="label">hover each button</p>
+
+<p class="hint">hover to expand · each item has its own gradient</p>
+</body>
+</html>
