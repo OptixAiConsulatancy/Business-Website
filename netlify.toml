@@ -6,3 +6,8 @@
   from = "/api/chat"
   to = "/.netlify/functions/chat"
   status = 200
+
+[[redirects]]
+  from = "/api/send-lead"
+  to = "/.netlify/functions/send-lead"
+  status = 200

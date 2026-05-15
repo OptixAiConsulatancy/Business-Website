@@ -136,9 +136,18 @@
   }
 
   function submitLead(leadData) {
+    // Send auto-reply to visitor + notify owner via Resend
+    fetch('/.netlify/functions/send-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(leadData),
+    }).catch(() => {});
+
+    // Also store in Netlify Forms as a backup record
     const body = new URLSearchParams({
       'form-name': 'lead-capture',
       visitor_name: leadData.name || 'Unknown',
+      email: leadData.email || '',
       business: leadData.business || 'Unknown',
       need: leadData.need || 'Unknown',
       conversation: history.map(m => `${m.role}: ${m.content}`).join('\n\n')
