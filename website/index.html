@@ -217,7 +217,7 @@
       <p class="label">Get in touch</p>
       <h2>Ready to reclaim your time?</h2>
       <p class="hero-sub">Book a free 30-minute discovery call. We'll map out exactly where automation can save you the most time — no obligation.</p>
-      <a href="mailto:hello@automately.com.au" class="btn-primary">Book a free call →</a>
+      <a href="https://calendly.com/optixai01/30min" target="_blank" class="btn-primary">Book a free call →</a>
     </div>
   </section>
 
@@ -229,6 +229,15 @@
       <p class="footer-copy">© 2025 Automately. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Hidden form so Netlify detects it at build time -->
+  <form name="lead-capture" data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="lead-capture" />
+    <input name="visitor_name" />
+    <input name="business" />
+    <input name="need" />
+    <input name="conversation" />
+  </form>
 
   <script src="chat.js"></script>
 </body>
