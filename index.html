@@ -13,9 +13,9 @@
       display: block;
       animation: heroSlideUp 0.75s cubic-bezier(0.4, 0, 0.2, 1) both;
     }
-    .hero-reveal:nth-child(1) > * { animation-delay: 0.05s; }
-    .hero-reveal:nth-child(2) > * { animation-delay: 0.22s; }
-    .hero-reveal:nth-child(3) > * { animation-delay: 0.42s; }
+    .hero-reveal:nth-child(2) > * { animation-delay: 0.05s; }
+    .hero-reveal:nth-child(3) > * { animation-delay: 0.22s; }
+    .hero-reveal:nth-child(4) > * { animation-delay: 0.42s; }
     .hero-reveal-fade {
       animation: heroFadeUp 0.75s 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
     }
@@ -26,6 +26,72 @@
     @keyframes heroFadeUp {
       from { transform: translateY(16px); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    /* === Lamp Effect === */
+    .hero { background: #04050f !important; position: relative; overflow: hidden; }
+    .hero-inner { position: relative; z-index: 2; }
+    .lamp-wrap { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .lamp-beam-l {
+      position: absolute; top: 0; right: 50%; height: 30vh; width: 52vw;
+      background: radial-gradient(ellipse at 100% 100%, rgba(6,182,212,0.5) 0%, rgba(6,182,212,0.07) 45%, transparent 68%);
+      clip-path: polygon(100% 100%, 0% 0%, 100% 0%);
+      transform-origin: right bottom;
+      animation: lampBeamL 0.9s 0.05s ease-in-out both;
+    }
+    .lamp-beam-r {
+      position: absolute; top: 0; left: 50%; height: 30vh; width: 52vw;
+      background: radial-gradient(ellipse at 0% 100%, rgba(6,182,212,0.5) 0%, rgba(6,182,212,0.07) 45%, transparent 68%);
+      clip-path: polygon(0% 100%, 0% 0%, 100% 0%);
+      transform-origin: left bottom;
+      animation: lampBeamR 0.9s 0.05s ease-in-out both;
+    }
+    @keyframes lampBeamL { from { transform: scaleX(0.04); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+    @keyframes lampBeamR { from { transform: scaleX(0.04); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+    .lamp-glow {
+      position: absolute; top: 30vh; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(32rem, 70vw); height: 10rem;
+      border-radius: 50%;
+      background: rgba(6,182,212,0.28);
+      filter: blur(48px);
+      animation: lampGlowAnim 0.9s 0.05s ease-in-out both;
+    }
+    @keyframes lampGlowAnim {
+      from { opacity: 0; transform: translate(-50%,-50%) scaleX(0.1); }
+      to   { opacity: 1; transform: translate(-50%,-50%) scaleX(1); }
+    }
+    .lamp-bright {
+      position: absolute; top: 30vh; left: 50%;
+      transform: translate(-50%, -56%);
+      width: min(14rem, 28vw); height: 8rem;
+      border-radius: 50%;
+      background: rgba(34,211,238,0.42);
+      filter: blur(18px);
+      animation: lampBrightAnim 0.9s 0.05s ease-in-out both;
+    }
+    @keyframes lampBrightAnim {
+      from { opacity: 0; transform: translate(-50%,-56%) scaleX(0.1); }
+      to   { opacity: 1; transform: translate(-50%,-56%) scaleX(1); }
+    }
+    .lamp-line {
+      position: absolute; top: 30vh; left: 50%;
+      transform: translateX(-50%) translateY(-1px);
+      height: 2px;
+      background: #22d3ee;
+      border-radius: 2px;
+      box-shadow: 0 0 8px 2px rgba(34,211,238,0.85), 0 0 28px 8px rgba(6,182,212,0.4);
+      animation: lampLineAnim 0.9s 0.05s ease-in-out both;
+    }
+    @keyframes lampLineAnim {
+      from { width: 5rem; opacity: 0; }
+      to   { width: min(30rem, 72vw); opacity: 1; }
+    }
+    .lamp-cover {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 14vh;
+      background: linear-gradient(to bottom, #04050f 40%, transparent);
+      z-index: 1;
     }
   </style>
 </head>
@@ -47,6 +113,14 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="lamp-wrap" aria-hidden="true">
+      <div class="lamp-beam-l"></div>
+      <div class="lamp-beam-r"></div>
+      <div class="lamp-glow"></div>
+      <div class="lamp-bright"></div>
+      <div class="lamp-line"></div>
+      <div class="lamp-cover"></div>
+    </div>
     <div class="hero-inner">
       <div class="hero-reveal"><div class="badge">Based in Gold Coast · Built for Australian SMBs</div></div>
       <div class="hero-reveal"><h1>Stop running your business.<br/>Let it <span class="grad">run itself.</span></h1></div>
@@ -251,7 +325,7 @@
         <div class="reviews-track" id="reviewsTrack">
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">“Optix saved us hours every week on lead follow-ups. We used to lose enquiries by responding too slow — now it's instant, automatic, and we've doubled our conversion rate.”</p>
+            <p class="review-text">"Optix saved us hours every week on lead follow-ups. We used to lose enquiries by responding too slow — now it's instant, automatic, and we've doubled our conversion rate."</p>
             <div class="review-author">
               <div class="review-avatar">JM</div>
               <div>
@@ -266,7 +340,7 @@
           </div>
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">“Our onboarding used to take 3 days of back and forth. Optix built us an automated workflow that handles it in 20 minutes. The ROI was obvious within the first week.”</p>
+            <p class="review-text">"Our onboarding used to take 3 days of back and forth. Optix built us an automated workflow that handles it in 20 minutes. The ROI was obvious within the first week."</p>
             <div class="review-author">
               <div class="review-avatar">SR</div>
               <div>
@@ -281,7 +355,7 @@
           </div>
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">“I was skeptical AI automation would actually work for a physio clinic. Optix proved me wrong — appointment reminders alone cut our no-show rate by 40%. Couldn't be happier.”</p>
+            <p class="review-text">"I was skeptical AI automation would actually work for a physio clinic. Optix proved me wrong — appointment reminders alone cut our no-show rate by 40%. Couldn't be happier."</p>
             <div class="review-author">
               <div class="review-avatar">DK</div>
               <div>
@@ -296,7 +370,7 @@
           </div>
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">“We were drowning in admin. Optix automated our quoting, invoicing follow-ups, and job scheduling. My team now focuses on actual work instead of chasing paperwork.”</p>
+            <p class="review-text">"We were drowning in admin. Optix automated our quoting, invoicing follow-ups, and job scheduling. My team now focuses on actual work instead of chasing paperwork."</p>
             <div class="review-author">
               <div class="review-avatar">TW</div>
               <div>
@@ -311,7 +385,7 @@
           </div>
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">“The discovery call alone was worth it. They identified three automations we'd never thought of and the first one paid for itself in the first month. Highly recommend.”</p>
+            <p class="review-text">"The discovery call alone was worth it. They identified three automations we'd never thought of and the first one paid for itself in the first month. Highly recommend."</p>
             <div class="review-author">
               <div class="review-avatar">AL</div>
               <div>
