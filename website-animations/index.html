@@ -6,59 +6,115 @@
 <title>Animation Previews — Automately</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #080808; font-family: 'Inter', sans-serif; color: #f0f0f0; padding: 4rem 2rem; }
-  h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
-  .sub { color: #888; margin-bottom: 3rem; font-size: 0.95rem; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; max-width: 1000px; }
-  a.card {
-    background: #141414;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px;
+  body {
+    background: #080808;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 3rem 2rem;
+    color: #fff;
+  }
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .sub {
+    color: rgba(255,255,255,0.35);
+    font-size: 0.9rem;
+    margin-bottom: 3rem;
+    letter-spacing: 0.05em;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+  }
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
     padding: 1.75rem;
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
     display: block;
   }
-  a.card:hover { border-color: rgba(124,109,250,0.4); transform: translateY(-2px); }
-  .num { font-size: 0.72rem; font-weight: 700; color: #7c6dfa; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
-  h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
-  p { font-size: 0.85rem; color: #888; line-height: 1.6; }
+  .card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(124,109,250,0.4);
+    transform: translateY(-3px);
+  }
+  .num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(124,109,250,0.2);
+    letter-spacing: -0.04em;
+    margin-bottom: 0.75rem;
+  }
+  .card h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .card p {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+  .tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7c6dfa;
+  }
 </style>
 </head>
 <body>
 <h1>Animation Previews</h1>
-<p class="sub">Click any card to preview the animation. Tell me which ones you want on your website.</p>
+<p class="sub">Click any card to preview — choose what you want on the website</p>
+
 <div class="grid">
-  <a class="card" href="1-cinematic-zoom.html" target="_blank">
+  <a class="card" href="1-cinematic-zoom.html">
     <div class="num">01</div>
-    <h3>Cinematic Zoom</h3>
-    <p>Apple-style zoom transition between pages with blur and depth.</p>
+    <h2>Cinematic Zoom</h2>
+    <p>Apple-style zoom with blur. Scene zooms out and fades as the next zooms in.</p>
+    <span class="tag">Click to preview →</span>
   </a>
-  <a class="card" href="2-scroll-snap.html" target="_blank">
+  <a class="card" href="2-scroll-snap.html">
     <div class="num">02</div>
-    <h3>Smooth Scroll Snap</h3>
-    <p>Full-screen sections that snap into place with blur and scale effects.</p>
+    <h2>Scroll Snap Sections</h2>
+    <p>Each section snaps into place with a fade + scale-in reveal on scroll.</p>
+    <span class="tag">Click to preview →</span>
   </a>
-  <a class="card" href="3-3d-cards.html" target="_blank">
+  <a class="card" href="3-3d-cards.html">
     <div class="num">03</div>
-    <h3>3D Floating Cards</h3>
-    <p>Cards in 3D space with depth, rotation, and smooth camera movement.</p>
+    <h2>3D Floating Cards</h2>
+    <p>Services in 3D perspective — front card sharp, side cards recede in depth.</p>
+    <span class="tag">Click to preview →</span>
   </a>
-  <a class="card" href="4-typography.html" target="_blank">
+  <a class="card" href="4-typography.html">
     <div class="num">04</div>
-    <h3>Bold Typography</h3>
-    <p>Large text slides up staggered, then pushes back in 3D on exit.</p>
+    <h2>Bold Typography</h2>
+    <p>Words slide up one by one with staggered timing. Clean, high-impact reveal.</p>
+    <span class="tag">Click to preview →</span>
   </a>
-  <a class="card" href="5-neon-wipe.html" target="_blank">
+  <a class="card" href="5-neon-wipe.html">
     <div class="num">05</div>
-    <h3>Neon Geometric Wipe</h3>
-    <p>Glowing neon slashes wipe diagonally across the screen between scenes.</p>
+    <h2>Neon Wipe</h2>
+    <p>Three neon diagonal slashes wipe across the screen to reveal a new scene.</p>
+    <span class="tag">Click to preview →</span>
   </a>
-  <a class="card" href="6-floating-ui.html" target="_blank">
+  <a class="card" href="6-floating-ui.html">
     <div class="num">06</div>
-    <h3>Floating UI Orbit</h3>
-    <p>3D UI panels orbiting in space with particles. Hover to pause.</p>
+    <h2>Orbiting UI Panels</h2>
+    <p>3D UI panels slowly orbit in space. Hover to pause. Shows your services.</p>
+    <span class="tag">Click to preview →</span>
   </a>
 </div>
 </body>

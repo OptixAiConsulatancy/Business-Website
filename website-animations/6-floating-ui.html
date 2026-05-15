@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>6 — Floating UI Showcase</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #000;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    width: 100vw; height: 100vh;
+    perspective: 1000px;
+  }
+
+  .bg {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, #0d0020 0%, #000 65%);
+  }
+
+  .orbit {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform-style: preserve-3d;
+    animation: orbit 18s linear infinite;
+  }
+
+  @keyframes orbit {
+    from { transform: translate(-50%, -50%) rotateY(0deg); }
+    to   { transform: translate(-50%, -50%) rotateY(360deg); }
+  }
+
+  .panel {
+    position: absolute;
+    width: 300px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 1.75rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07);
+    top: 0; left: 0;
+    transform-origin: center;
+  }
+
+  .panel-1 { transform: translateX(-150px) translateY(-180px) translateZ(300px); }
+  .panel-2 { transform: translateX(-150px) translateY(-180px) translateZ(-300px); }
+  .panel-3 { transform: translateX(-150px) translateY(-180px) translateZ(0px) translateX(350px); }
+
+  .panel-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7c6dfa;
+    margin-bottom: 1rem;
+  }
+  .panel h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+  }
+  .panel p {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06); margin-bottom: 0.5rem; }
+  .bar.w80 { width: 80%; }
+  .bar.w60 { width: 60%; }
+  .bar.w90 { width: 90%; }
+  .bar.accent { background: rgba(124,109,250,0.4); width: 45%; }
+
+  .chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    height: 50px;
+    margin-top: 0.5rem;
+  }
+  .bar-v {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: rgba(124,109,250,0.3);
+    transition: height 0.3s;
+  }
+  .bar-v.hi { background: rgba(124,109,250,0.7); }
+
+  .stat { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+  .stat-val { font-size: 0.78rem; color: #7c6dfa; font-weight: 600; }
+
+  .centre {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .centre h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    opacity: 0.15;
+  }
+
+  .orbit:hover { animation-play-state: paused; }
+  .hint {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.2);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    z-index: 100;
+  }
+
+  .particle {
+    position: fixed;
+    width: 2px; height: 2px;
+    background: rgba(124,109,250,0.6);
+    border-radius: 50%;
+    animation: float linear infinite;
+  }
+  @keyframes float {
+    0%   { transform: translateY(100vh); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="orbit">
+  <div class="panel panel-1">
+    <div class="panel-label">Dashboard</div>
+    <h3>Lead Agents</h3>
+    <p>Active automations running 24/7 for your business.</p>
+    <div class="stat"><span class="stat-label">Active workflows</span><span class="stat-val">12</span></div>
+    <div class="stat"><span class="stat-label">Leads handled</span><span class="stat-val">847</span></div>
+    <div class="stat"><span class="stat-label">Hours saved</span><span class="stat-val">64 hrs</span></div>
+    <div class="chart">
+      <div class="bar-v" style="height:30%"></div>
+      <div class="bar-v" style="height:55%"></div>
+      <div class="bar-v" style="height:40%"></div>
+      <div class="bar-v hi" style="height:80%"></div>
+      <div class="bar-v" style="height:65%"></div>
+      <div class="bar-v hi" style="height:90%"></div>
+      <div class="bar-v" style="height:70%"></div>
+    </div>
+  </div>
+
+  <div class="panel panel-2">
+    <div class="panel-label">Services</div>
+    <h3>What We Build</h3>
+    <p>Automations that pay for themselves from day one.</p>
+    <div class="bar w80"></div>
+    <div class="bar accent"></div>
+    <div class="bar w60"></div>
+    <div class="bar w90"></div>
+    <div class="bar accent" style="width:70%"></div>
+    <div class="bar w80"></div>
+  </div>
+
+  <div class="panel panel-3">
+    <div class="panel-label">Process</div>
+    <h3>From Call to Live</h3>
+    <p>Discovery to deployed automation in 2–4 weeks.</p>
+    <div class="stat"><span class="stat-label">Discovery call</span><span class="stat-val">Free</span></div>
+    <div class="stat"><span class="stat-label">Build time</span><span class="stat-val">2–4 wks</span></div>
+    <div class="stat"><span class="stat-label">Lock-in</span><span class="stat-val">None</span></div>
+    <div class="stat"><span class="stat-label">Support</span><span class="stat-val">Ongoing</span></div>
+  </div>
+</div>
+
+<div class="centre">
+  <h1>Automately</h1>
+</div>
+
+<p class="hint">hover to pause · orbiting 3D panels</p>
+
+<script>
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (Math.random() > 0.7 ? 3 : 2) + 'px';
+    document.body.appendChild(p);
+  }
+</script>
+</body>
+</html>

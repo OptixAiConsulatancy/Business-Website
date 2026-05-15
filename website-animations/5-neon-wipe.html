@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>5 — Neon Geometric Wipe</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #000;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    width: 100vw; height: 100vh;
+  }
+
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .scene-1 { background: #000; z-index: 1; }
+  .scene-2 { background: #050010; z-index: 0; }
+
+  h2 {
+    color: #fff;
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-align: center;
+    line-height: 1.05;
+  }
+  .neon { color: #ff2d78; text-shadow: 0 0 30px rgba(255,45,120,0.6), 0 0 60px rgba(255,45,120,0.3); }
+  .blue { color: #00d4ff; text-shadow: 0 0 30px rgba(0,212,255,0.6); }
+  .sub { color: rgba(255,255,255,0.3); font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .wipe-container {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .shape {
+    position: absolute;
+    opacity: 0;
+  }
+  .shape-1 {
+    width: 200%;
+    height: 200%;
+    top: -50%; left: -120%;
+    background: linear-gradient(90deg, transparent 0%, #ff2d78 45%, #ff2d78 55%, transparent 100%);
+    transform: rotate(-20deg);
+    filter: blur(1px);
+    box-shadow: 0 0 40px rgba(255,45,120,0.8);
+  }
+  .shape-2 {
+    width: 200%;
+    height: 200%;
+    top: -50%; left: -120%;
+    background: linear-gradient(90deg, transparent 0%, #00d4ff 45%, #00d4ff 55%, transparent 100%);
+    transform: rotate(-20deg);
+    filter: blur(1px);
+    box-shadow: 0 0 40px rgba(0,212,255,0.8);
+  }
+  .shape-3 {
+    width: 200%;
+    height: 200%;
+    top: -50%; left: -120%;
+    background: linear-gradient(90deg, transparent 0%, #7c6dfa 45%, #7c6dfa 55%, transparent 100%);
+    transform: rotate(-20deg);
+    filter: blur(1px);
+    box-shadow: 0 0 40px rgba(124,109,250,0.8);
+  }
+
+  @keyframes wipeAcross {
+    0%   { opacity: 1; left: -120%; }
+    100% { opacity: 1; left: 120%; }
+  }
+  @keyframes fadeScene {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  @keyframes showScene2 {
+    0%   { opacity: 0; }
+    60%  { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .animating .shape-1 { animation: wipeAcross 0.5s 0s cubic-bezier(0.4,0,0.6,1) forwards; }
+  .animating .shape-2 { animation: wipeAcross 0.5s 0.08s cubic-bezier(0.4,0,0.6,1) forwards; }
+  .animating .shape-3 { animation: wipeAcross 0.5s 0.16s cubic-bezier(0.4,0,0.6,1) forwards; }
+  .animating .scene-1 { animation: fadeScene 0.7s forwards; }
+  .animating .scene-2 { animation: showScene2 0.7s forwards; z-index: 2; }
+
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  .btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,45,120,0.1);
+    border: 1px solid rgba(255,45,120,0.3);
+    color: #ff2d78;
+    padding: 0.65rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    z-index: 100;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 20px rgba(255,45,120,0.2);
+  }
+  .btn:hover { background: rgba(255,45,120,0.2); box-shadow: 0 0 30px rgba(255,45,120,0.4); }
+</style>
+</head>
+<body>
+
+<div class="scanlines"></div>
+
+<div id="wrapper">
+  <div class="scene scene-1">
+    <p class="sub">Automately</p>
+    <h2>We Build<br/><span class="neon">AI Agents</span><br/>That Work.</h2>
+  </div>
+  <div class="scene scene-2">
+    <p class="sub">Services</p>
+    <h2>Lead Bots.<br/><span class="blue">Doc Processing.</span><br/>Reporting.</h2>
+  </div>
+  <div class="wipe-container" id="wipe">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+</div>
+
+<button class="btn" id="btn">▶ Fire Transition</button>
+
+<script>
+  const wrapper = document.getElementById('wrapper');
+  const btn = document.getElementById('btn');
+  let fired = false;
+
+  btn.addEventListener('click', () => {
+    if (fired) {
+      wrapper.classList.remove('animating');
+      void wrapper.offsetWidth;
+      fired = false;
+      btn.textContent = '▶ Fire Transition';
+      return;
+    }
+    wrapper.classList.add('animating');
+    fired = true;
+    btn.textContent = 'Reset';
+  });
+</script>
+</body>
+</html>
