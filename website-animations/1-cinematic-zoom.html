@@ -3,125 +3,114 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>1 — Cinematic Zoom Transition</title>
+<title>1 — Cinematic Zoom</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #000; font-family: 'Inter', sans-serif; overflow: hidden; width: 100vw; height: 100vh; }
-
+  body {
+    background: #000;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    width: 100vw; height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .scene {
     position: absolute;
     inset: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
   }
-
-  .scene-1 {
-    background: radial-gradient(ellipse at center, #1a0533 0%, #000 70%);
-    z-index: 2;
-  }
-  .scene-2 {
-    background: radial-gradient(ellipse at center, #001a33 0%, #000 70%);
-    z-index: 1;
-  }
-
-  h1 {
+  h2 {
     color: #fff;
-    font-size: clamp(2rem, 6vw, 5rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
     text-align: center;
+    line-height: 1.05;
   }
+  .accent { color: #7c6dfa; }
   .sub {
-    color: rgba(255,255,255,0.4);
-    font-size: clamp(1rem, 2vw, 1.4rem);
-    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    font-size: 1rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
-  .dot {
-    width: 6px; height: 6px;
-    background: #7c6dfa;
-    border-radius: 50%;
-    box-shadow: 0 0 20px #7c6dfa;
+  .scene-1 { background: radial-gradient(ellipse at 50% 30%, #1a0533 0%, #000 70%); z-index: 2; }
+  .scene-2 { background: radial-gradient(ellipse at 50% 30%, #001a33 0%, #000 70%); z-index: 1; }
+  @keyframes zoomOut {
+    to { transform: scale(1.4); opacity: 0; filter: blur(12px); }
   }
-
-  .scene-1 h1 { color: #fff; }
-  .scene-2 h1 { color: #60a5fa; }
-
   @keyframes zoomIn {
-    0%   { transform: scale(1); filter: blur(0px); opacity: 1; }
-    70%  { transform: scale(4); filter: blur(8px); opacity: 0.6; }
-    100% { transform: scale(8); filter: blur(20px); opacity: 0; }
+    from { transform: scale(0.85); opacity: 0; filter: blur(8px); }
+    to   { transform: scale(1);    opacity: 1; filter: blur(0px); }
   }
-  @keyframes fadeInScene2 {
-    0%   { opacity: 0; transform: scale(0.3); filter: blur(20px); }
-    40%  { opacity: 0; }
-    100% { opacity: 1; transform: scale(1); filter: blur(0px); }
-  }
-
-  .scene-1.animate { animation: zoomIn 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-  .scene-2.animate { animation: fadeInScene2 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-
+  .playing .scene-1 { animation: zoomOut 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .playing .scene-2 { animation: zoomIn  0.7s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards; z-index: 3; }
   .btn {
     position: fixed;
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
     color: #fff;
-    padding: 0.75rem 2rem;
+    padding: 0.65rem 2rem;
     border-radius: 100px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     z-index: 100;
     backdrop-filter: blur(10px);
     transition: background 0.2s;
   }
-  .btn:hover { background: rgba(255,255,255,0.15); }
-
-  .bg-grid {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(124,109,250,0.15) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
+  .btn:hover { background: rgba(255,255,255,0.12); }
+  .back {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.82rem;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    z-index: 200;
   }
+  .back:hover { color: #fff; }
 </style>
 </head>
 <body>
-<div class="scene scene-2" id="scene2">
-  <div class="bg-grid"></div>
-  <div class="dot"></div>
-  <p class="sub">Next Page</p>
-  <h1>What We Build</h1>
-  <p class="sub">AI Automation Agency</p>
-</div>
-<div class="scene scene-1" id="scene1">
-  <div class="bg-grid"></div>
-  <div class="dot"></div>
-  <p class="sub">Automately</p>
-  <h1>Your Business<br/>Runs Itself.</h1>
-  <p class="sub">Gold Coast · Australia</p>
+<script>
+  if (sessionStorage.getItem('anim_auth') !== '1485') { location.href = 'index.html'; }
+</script>
+<a class="back" href="index.html">← Back</a>
+<div id="wrapper">
+  <div class="scene scene-1">
+    <p class="sub">Automately</p>
+    <h2>Your Business<br/><span class="accent">Runs Itself.</span></h2>
+  </div>
+  <div class="scene scene-2">
+    <p class="sub">What We Build</p>
+    <h2>AI Agents<br/><span class="accent">That Work.</span></h2>
+  </div>
 </div>
 <button class="btn" id="btn">Play Transition →</button>
 <script>
-  let played = false;
-  document.getElementById('btn').addEventListener('click', function() {
-    if (played) {
-      document.getElementById('scene1').classList.remove('animate');
-      document.getElementById('scene2').classList.remove('animate');
-      void document.getElementById('scene1').offsetWidth;
-      played = false;
-      this.textContent = 'Play Transition →';
-      return;
+  const wrapper = document.getElementById('wrapper');
+  const btn = document.getElementById('btn');
+  let playing = false;
+  btn.addEventListener('click', () => {
+    if (playing) {
+      wrapper.classList.remove('playing');
+      void wrapper.offsetWidth;
+      playing = false;
+      btn.textContent = 'Play Transition →';
+    } else {
+      wrapper.classList.add('playing');
+      playing = true;
+      btn.textContent = 'Reset ↺';
     }
-    document.getElementById('scene1').classList.add('animate');
-    document.getElementById('scene2').classList.add('animate');
-    played = true;
-    this.textContent = 'Reset';
   });
 </script>
 </body>

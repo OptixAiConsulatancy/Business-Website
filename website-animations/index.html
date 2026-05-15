@@ -73,9 +73,53 @@
     text-transform: uppercase;
     color: #7c6dfa;
   }
+  #gate {
+    position: fixed;
+    inset: 0;
+    background: #080808;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 9999;
+  }
+  #gate h2 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; }
+  #gate input {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    text-align: center;
+    letter-spacing: 0.2em;
+    width: 180px;
+  }
+  #gate button {
+    background: #7c6dfa;
+    border: none;
+    color: #fff;
+    padding: 0.65rem 2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #gate .err { color: #ff5555; font-size: 0.82rem; display: none; }
 </style>
 </head>
 <body>
+
+<div id="gate">
+  <h2>Enter Password</h2>
+  <input type="password" id="pw" placeholder="••••" />
+  <button onclick="check()">Unlock</button>
+  <p class="err" id="err">Wrong password.</p>
+</div>
+
+<div id="content" style="display:none">
 <h1>Animation Previews</h1>
 <p class="sub">Click any card to preview — choose what you want on the website</p>
 
@@ -117,5 +161,25 @@
     <span class="tag">Click to preview →</span>
   </a>
 </div>
+</div>
+
+<script>
+  const PW = '1485';
+  function check() {
+    if (document.getElementById('pw').value === PW) {
+      sessionStorage.setItem('anim_auth', PW);
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+    } else {
+      document.getElementById('err').style.display = 'block';
+      document.getElementById('pw').value = '';
+    }
+  }
+  document.getElementById('pw').addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+  if (sessionStorage.getItem('anim_auth') === PW) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+  }
+</script>
 </body>
 </html>
