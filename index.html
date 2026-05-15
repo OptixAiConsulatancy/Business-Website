@@ -28,70 +28,60 @@
       to   { transform: translateY(0);    opacity: 1; }
     }
 
-    /* === Lamp: single central spotlight shining DOWN onto the text === */
+    /* === Lamp: full-width bar at hero top edge, light shines straight down === */
     .hero { background: #04050f !important; position: relative; overflow: hidden; }
     .hero-inner { position: relative; z-index: 2; }
     .lamp-wrap { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 
-    /* Single wide cone — bright at top-centre, fades downward & outward */
+    /* Straight-down flood from the full-width bar */
     .lamp-cone {
       position: absolute;
-      top: 15vh;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90vw;
-      height: 72vh;
-      background: radial-gradient(ellipse at 50% 0%,
+      top: 0; left: 0; right: 0;
+      height: 82vh;
+      background: linear-gradient(to bottom,
         rgba(124,109,250,0.55) 0%,
-        rgba(124,109,250,0.22) 28%,
-        rgba(124,109,250,0.06) 55%,
-        transparent 75%);
-      animation: lampConeAnim 0.9s 0.05s ease-in-out both;
-    }
-    @keyframes lampConeAnim {
-      from { opacity: 0; transform: translateX(-50%) scaleX(0.06); }
-      to   { opacity: 1; transform: translateX(-50%) scaleX(1); }
+        rgba(124,109,250,0.2)  20%,
+        rgba(124,109,250,0.06) 50%,
+        transparent 72%);
+      animation: lampFade 0.9s 0.05s ease-in-out both;
     }
 
-    /* Bright inner glow right at the line — the "bulb" */
+    /* Central bright glow on the bar */
     .lamp-bright {
       position: absolute;
-      top: 15vh; left: 50%;
-      transform: translate(-50%, -58%);
-      width: min(14rem, 28vw); height: 7rem;
+      top: 0; left: 50%;
+      transform: translate(-50%, -35%);
+      width: min(55vw, 42rem); height: 12rem;
       border-radius: 50%;
-      background: rgba(167,139,250,0.55);
-      filter: blur(16px);
-      animation: lampBrightAnim 0.9s 0.05s ease-in-out both;
-    }
-    @keyframes lampBrightAnim {
-      from { opacity: 0; transform: translate(-50%,-58%) scaleX(0.08); }
-      to   { opacity: 1; transform: translate(-50%,-58%) scaleX(1); }
+      background: rgba(167,139,250,0.45);
+      filter: blur(28px);
+      animation: lampFade 0.9s 0.05s ease-in-out both;
     }
 
-    /* Horizontal glowing line */
+    /* Full-width glowing line spanning edge-to-edge */
     .lamp-line {
       position: absolute;
-      top: 15vh; left: 50%;
-      transform: translateX(-50%) translateY(-1px);
+      top: 0; left: 0; right: 0;
       height: 2px;
-      background: #a78bfa;
-      border-radius: 2px;
-      box-shadow: 0 0 8px 2px rgba(167,139,250,0.9), 0 0 28px 8px rgba(124,109,250,0.55);
-      animation: lampLineAnim 0.9s 0.05s ease-in-out both;
-    }
-    @keyframes lampLineAnim {
-      from { width: 5rem; opacity: 0; }
-      to   { width: min(30rem, 72vw); opacity: 1; }
+      background: linear-gradient(to right,
+        transparent 0%,
+        rgba(167,139,250,0.6) 8%,
+        rgba(200,180,255,1)   50%,
+        rgba(167,139,250,0.6) 92%,
+        transparent 100%);
+      box-shadow: 0 0 10px 3px rgba(167,139,250,0.7),
+                  0 0 30px 8px rgba(124,109,250,0.45);
+      transform-origin: center;
+      animation: lampLineExpand 0.9s 0.05s ease-in-out both;
     }
 
-    /* Dark cover — hides the lamp above the nav */
-    .lamp-cover {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 13vh;
-      background: linear-gradient(to bottom, #04050f 55%, transparent);
-      z-index: 1;
+    @keyframes lampFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes lampLineExpand {
+      from { opacity: 0; transform: scaleX(0.04); }
+      to   { opacity: 1; transform: scaleX(1); }
     }
   </style>
 </head>
@@ -117,7 +107,6 @@
       <div class="lamp-cone"></div>
       <div class="lamp-bright"></div>
       <div class="lamp-line"></div>
-      <div class="lamp-cover"></div>
     </div>
     <div class="hero-inner">
       <div class="hero-reveal"><h1>Stop running your business.<br/>Let it <span class="grad">run itself.</span></h1></div>
@@ -226,31 +215,11 @@
       <h2>Real results for real businesses</h2>
       <div class="reviews-slider">
         <div class="reviews-track" id="reviewsTrack">
-          <div class="review-card">
-            <div class="review-stars">★★★★★</div>
-            <p class="review-text">"Optix saved us hours every week on lead follow-ups. We used to lose enquiries by responding too slow — now it's instant, automatic, and we've doubled our conversion rate."</p>
-            <div class="review-author"><div class="review-avatar">JM</div><div><div class="review-name">James M.</div><div class="review-biz">Gold Coast Plumbing Co.</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div>
-          </div>
-          <div class="review-card">
-            <div class="review-stars">★★★★★</div>
-            <p class="review-text">"Our onboarding used to take 3 days of back and forth. Optix built us an automated workflow that handles it in 20 minutes. The ROI was obvious within the first week."</p>
-            <div class="review-author"><div class="review-avatar">SR</div><div><div class="review-name">Sarah R.</div><div class="review-biz">Coastal Real Estate Group</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div>
-          </div>
-          <div class="review-card">
-            <div class="review-stars">★★★★★</div>
-            <p class="review-text">"I was skeptical AI automation would actually work for a physio clinic. Optix proved me wrong — appointment reminders alone cut our no-show rate by 40%. Couldn't be happier."</p>
-            <div class="review-author"><div class="review-avatar">DK</div><div><div class="review-name">Dr. Daniel K.</div><div class="review-biz">Surfers Paradise Physio</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div>
-          </div>
-          <div class="review-card">
-            <div class="review-stars">★★★★★</div>
-            <p class="review-text">"We were drowning in admin. Optix automated our quoting, invoicing follow-ups, and job scheduling. My team now focuses on actual work instead of chasing paperwork."</p>
-            <div class="review-author"><div class="review-avatar">TW</div><div><div class="review-name">Tom W.</div><div class="review-biz">TW Constructions</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div>
-          </div>
-          <div class="review-card">
-            <div class="review-stars">★★★★★</div>
-            <p class="review-text">"The discovery call alone was worth it. They identified three automations we'd never thought of and the first one paid for itself in the first month. Highly recommend."</p>
-            <div class="review-author"><div class="review-avatar">AL</div><div><div class="review-name">Amanda L.</div><div class="review-biz">Broadbeach Accounting</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div>
-          </div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Optix saved us hours every week on lead follow-ups. We used to lose enquiries by responding too slow — now it's instant, automatic, and we've doubled our conversion rate."</p><div class="review-author"><div class="review-avatar">JM</div><div><div class="review-name">James M.</div><div class="review-biz">Gold Coast Plumbing Co.</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Our onboarding used to take 3 days of back and forth. Optix built us an automated workflow that handles it in 20 minutes. The ROI was obvious within the first week."</p><div class="review-author"><div class="review-avatar">SR</div><div><div class="review-name">Sarah R.</div><div class="review-biz">Coastal Real Estate Group</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"I was skeptical AI automation would actually work for a physio clinic. Optix proved me wrong — appointment reminders alone cut our no-show rate by 40%. Couldn't be happier."</p><div class="review-author"><div class="review-avatar">DK</div><div><div class="review-name">Dr. Daniel K.</div><div class="review-biz">Surfers Paradise Physio</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"We were drowning in admin. Optix automated our quoting, invoicing follow-ups, and job scheduling. My team now focuses on actual work instead of chasing paperwork."</p><div class="review-author"><div class="review-avatar">TW</div><div><div class="review-name">Tom W.</div><div class="review-biz">TW Constructions</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"The discovery call alone was worth it. They identified three automations we'd never thought of and the first one paid for itself in the first month. Highly recommend."</p><div class="review-author"><div class="review-avatar">AL</div><div><div class="review-name">Amanda L.</div><div class="review-biz">Broadbeach Accounting</div></div><div class="google-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Review</div></div></div>
         </div>
         <div class="reviews-nav">
           <button class="rev-btn" id="revPrev">←</button>
@@ -276,14 +245,8 @@
           <div class="form-group"><label>Email address</label><input type="email" placeholder="john@smithplumbing.com.au" required /></div>
           <div class="form-group"><label>Phone number</label><input type="tel" placeholder="04XX XXX XXX" /></div>
         </div>
-        <div class="form-group">
-          <label>Industry</label>
-          <select required><option value="" disabled selected>Select your industry</option><option>Trades &amp; Construction</option><option>Real Estate</option><option>Allied Health</option><option>Hospitality &amp; Tourism</option><option>Professional Services</option><option>Retail &amp; eCommerce</option><option>Other</option></select>
-        </div>
-        <div class="form-group">
-          <label>What's your biggest time waster right now?</label>
-          <textarea placeholder="e.g. chasing leads, manually entering data, following up on invoices..." rows="4" required></textarea>
-        </div>
+        <div class="form-group"><label>Industry</label><select required><option value="" disabled selected>Select your industry</option><option>Trades &amp; Construction</option><option>Real Estate</option><option>Allied Health</option><option>Hospitality &amp; Tourism</option><option>Professional Services</option><option>Retail &amp; eCommerce</option><option>Other</option></select></div>
+        <div class="form-group"><label>What's your biggest time waster right now?</label><textarea placeholder="e.g. chasing leads, manually entering data, following up on invoices..." rows="4" required></textarea></div>
         <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:1rem;padding:1rem;">Book a free discovery call →</button>
         <p class="form-note">No spam. We'll only use your details to get back to you about your enquiry.</p>
       </form>
@@ -305,33 +268,28 @@
     const cards = track.querySelectorAll('.review-card');
     const total = cards.length;
     let current = 0;
-
     function setWidths() {
       const w = track.parentElement.offsetWidth;
       cards.forEach(c => { c.style.width = w + 'px'; c.style.minWidth = w + 'px'; });
       track.style.transform = `translateX(-${current * w}px)`;
     }
-
     for (let i = 0; i < total; i++) {
       const d = document.createElement('div');
       d.className = 'rev-dot' + (i === 0 ? ' active' : '');
       d.onclick = () => goTo(i);
       dotsContainer.appendChild(d);
     }
-
     function goTo(n) {
       current = (n + total) % total;
       const w = track.parentElement.offsetWidth;
       track.style.transform = `translateX(-${current * w}px)`;
       dotsContainer.querySelectorAll('.rev-dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
-
     setWidths();
     window.addEventListener('resize', setWidths);
     document.getElementById('revPrev').onclick = () => goTo(current - 1);
     document.getElementById('revNext').onclick = () => goTo(current + 1);
     setInterval(() => goTo(current + 1), 7000);
-
     function handleSubmit(e) {
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
