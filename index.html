@@ -13,9 +13,9 @@
       display: block;
       animation: heroSlideUp 0.75s cubic-bezier(0.4, 0, 0.2, 1) both;
     }
-    .hero-reveal:nth-child(2) > * { animation-delay: 0.05s; }
-    .hero-reveal:nth-child(3) > * { animation-delay: 0.22s; }
-    .hero-reveal:nth-child(4) > * { animation-delay: 0.42s; }
+    .hero-reveal:nth-child(1) > * { animation-delay: 0.05s; }
+    .hero-reveal:nth-child(2) > * { animation-delay: 0.22s; }
+    .hero-reveal:nth-child(3) > * { animation-delay: 0.42s; }
     .hero-reveal-fade {
       animation: heroFadeUp 0.75s 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
     }
@@ -28,69 +28,96 @@
       to   { transform: translateY(0);    opacity: 1; }
     }
 
-    /* === Lamp Effect === */
+    /* === Lamp Effect: purple, shines DOWN onto text === */
     .hero { background: #04050f !important; position: relative; overflow: hidden; }
     .hero-inner { position: relative; z-index: 2; }
     .lamp-wrap { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+
+    /* Left beam: apex at top-right (screen centre), triangle fills upper-left area going down */
     .lamp-beam-l {
-      position: absolute; top: 0; right: 50%; height: 30vh; width: 52vw;
-      background: radial-gradient(ellipse at 100% 100%, rgba(6,182,212,0.5) 0%, rgba(6,182,212,0.07) 45%, transparent 68%);
-      clip-path: polygon(100% 100%, 0% 0%, 100% 0%);
-      transform-origin: right bottom;
+      position: absolute;
+      top: 15vh; right: 50%;
+      width: 56vw; height: 60vh;
+      background: radial-gradient(ellipse at 100% 0%,
+        rgba(124,109,250,0.42) 0%,
+        rgba(124,109,250,0.08) 46%,
+        transparent 66%);
+      clip-path: polygon(100% 0%, 0% 0%, 0% 100%);
+      transform-origin: right top;
       animation: lampBeamL 0.9s 0.05s ease-in-out both;
     }
+
+    /* Right beam: apex at top-left (screen centre), triangle fills upper-right area going down */
     .lamp-beam-r {
-      position: absolute; top: 0; left: 50%; height: 30vh; width: 52vw;
-      background: radial-gradient(ellipse at 0% 100%, rgba(6,182,212,0.5) 0%, rgba(6,182,212,0.07) 45%, transparent 68%);
-      clip-path: polygon(0% 100%, 0% 0%, 100% 0%);
-      transform-origin: left bottom;
+      position: absolute;
+      top: 15vh; left: 50%;
+      width: 56vw; height: 60vh;
+      background: radial-gradient(ellipse at 0% 0%,
+        rgba(124,109,250,0.42) 0%,
+        rgba(124,109,250,0.08) 46%,
+        transparent 66%);
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+      transform-origin: left top;
       animation: lampBeamR 0.9s 0.05s ease-in-out both;
     }
+
     @keyframes lampBeamL { from { transform: scaleX(0.04); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
     @keyframes lampBeamR { from { transform: scaleX(0.04); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+
+    /* Large diffuse glow centred at the line */
     .lamp-glow {
-      position: absolute; top: 30vh; left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(32rem, 70vw); height: 10rem;
+      position: absolute;
+      top: 15vh; left: 50%;
+      transform: translate(-50%, -30%);
+      width: min(34rem, 72vw); height: 12rem;
       border-radius: 50%;
-      background: rgba(6,182,212,0.28);
-      filter: blur(48px);
+      background: rgba(124,109,250,0.3);
+      filter: blur(52px);
       animation: lampGlowAnim 0.9s 0.05s ease-in-out both;
     }
     @keyframes lampGlowAnim {
-      from { opacity: 0; transform: translate(-50%,-50%) scaleX(0.1); }
-      to   { opacity: 1; transform: translate(-50%,-50%) scaleX(1); }
+      from { opacity: 0; transform: translate(-50%,-30%) scaleX(0.08); }
+      to   { opacity: 1; transform: translate(-50%,-30%) scaleX(1); }
     }
+
+    /* Brighter inner glow just above the line */
     .lamp-bright {
-      position: absolute; top: 30vh; left: 50%;
-      transform: translate(-50%, -56%);
-      width: min(14rem, 28vw); height: 8rem;
+      position: absolute;
+      top: 15vh; left: 50%;
+      transform: translate(-50%, -58%);
+      width: min(14rem, 28vw); height: 7rem;
       border-radius: 50%;
-      background: rgba(34,211,238,0.42);
-      filter: blur(18px);
+      background: rgba(167,139,250,0.5);
+      filter: blur(16px);
       animation: lampBrightAnim 0.9s 0.05s ease-in-out both;
     }
     @keyframes lampBrightAnim {
-      from { opacity: 0; transform: translate(-50%,-56%) scaleX(0.1); }
-      to   { opacity: 1; transform: translate(-50%,-56%) scaleX(1); }
+      from { opacity: 0; transform: translate(-50%,-58%) scaleX(0.08); }
+      to   { opacity: 1; transform: translate(-50%,-58%) scaleX(1); }
     }
+
+    /* Horizontal glowing line */
     .lamp-line {
-      position: absolute; top: 30vh; left: 50%;
+      position: absolute;
+      top: 15vh; left: 50%;
       transform: translateX(-50%) translateY(-1px);
       height: 2px;
-      background: #22d3ee;
+      background: #a78bfa;
       border-radius: 2px;
-      box-shadow: 0 0 8px 2px rgba(34,211,238,0.85), 0 0 28px 8px rgba(6,182,212,0.4);
+      box-shadow: 0 0 8px 2px rgba(167,139,250,0.9), 0 0 28px 8px rgba(124,109,250,0.55);
       animation: lampLineAnim 0.9s 0.05s ease-in-out both;
     }
     @keyframes lampLineAnim {
       from { width: 5rem; opacity: 0; }
       to   { width: min(30rem, 72vw); opacity: 1; }
     }
+
+    /* Dark cover at the very top so beams don’t bleed into the nav */
     .lamp-cover {
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 14vh;
-      background: linear-gradient(to bottom, #04050f 40%, transparent);
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 12vh;
+      background: linear-gradient(to bottom, #04050f 50%, transparent);
       z-index: 1;
     }
   </style>
