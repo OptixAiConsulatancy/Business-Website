@@ -7,6 +7,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .hero-reveal { overflow: hidden; padding: 0.1rem 0; }
+    .hero-reveal > * {
+      display: block;
+      animation: heroSlideUp 0.75s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    .hero-reveal:nth-child(1) > * { animation-delay: 0.05s; }
+    .hero-reveal:nth-child(2) > * { animation-delay: 0.22s; }
+    .hero-reveal:nth-child(3) > * { animation-delay: 0.42s; }
+    .hero-reveal-fade {
+      animation: heroFadeUp 0.75s 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    @keyframes heroSlideUp {
+      from { transform: translateY(110%); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    @keyframes heroFadeUp {
+      from { transform: translateY(16px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+  </style>
 </head>
 <body>
 
@@ -27,10 +48,10 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="badge">Based in Gold Coast · Built for Australian SMBs</div>
-      <h1>Stop running your business.<br/>Let it <span class="grad">run itself.</span></h1>
-      <p class="hero-sub">We build AI automations that save your team hours every week — lead follow-ups, document processing, reporting, and more. No nonsense. Just results.</p>
-      <div class="hero-cta">
+      <div class="hero-reveal"><div class="badge">Based in Gold Coast · Built for Australian SMBs</div></div>
+      <div class="hero-reveal"><h1>Stop running your business.<br/>Let it <span class="grad">run itself.</span></h1></div>
+      <div class="hero-reveal"><p class="hero-sub">We build AI automations that save your team hours every week — lead follow-ups, document processing, reporting, and more. No nonsense. Just results.</p></div>
+      <div class="hero-cta hero-reveal-fade">
         <a href="https://calendly.com/optixai01/30min" target="_blank" class="btn-primary">Book a free discovery call</a>
         <a href="#process" class="btn-ghost">See how it works →</a>
       </div>
@@ -132,7 +153,7 @@
         <div class="industry">
           <span>🔧</span>
           <div>
-            <h4>Trades & Construction</h4>
+            <h4>Trades &amp; Construction</h4>
             <p>Quoting, job scheduling, follow-ups, compliance docs</p>
           </div>
         </div>
@@ -153,7 +174,7 @@
         <div class="industry">
           <span>🌴</span>
           <div>
-            <h4>Hospitality & Tourism</h4>
+            <h4>Hospitality &amp; Tourism</h4>
             <p>Booking follow-ups, review responses, staff rostering</p>
           </div>
         </div>
@@ -167,7 +188,7 @@
         <div class="industry">
           <span>📦</span>
           <div>
-            <h4>Retail & eCommerce</h4>
+            <h4>Retail &amp; eCommerce</h4>
             <p>Order workflows, customer support, inventory alerts</p>
           </div>
         </div>
@@ -186,9 +207,9 @@
           <div class="price">$1,500<span> – $10,000+</span></div>
           <p>One-off fee to scope, build, and deploy your automation.</p>
           <ul>
-            <li>Discovery & diagnosis included</li>
-            <li>Full build & testing</li>
-            <li>Staff training & handover</li>
+            <li>Discovery &amp; diagnosis included</li>
+            <li>Full build &amp; testing</li>
+            <li>Staff training &amp; handover</li>
             <li>30 days post-launch support</li>
           </ul>
           <a href="https://calendly.com/optixai01/30min" target="_blank" class="btn-primary">Get a quote</a>
@@ -200,7 +221,7 @@
           <p>Build it once, then keep it running and improving every month.</p>
           <ul>
             <li>Everything in Project</li>
-            <li>Monthly maintenance & updates</li>
+            <li>Monthly maintenance &amp; updates</li>
             <li>Performance reporting</li>
             <li>Priority support</li>
             <li>Ongoing improvements</li>
@@ -230,7 +251,7 @@
         <div class="reviews-track" id="reviewsTrack">
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">"Optix saved us hours every week on lead follow-ups. We used to lose enquiries by responding too slow — now it's instant, automatic, and we've doubled our conversion rate."</p>
+            <p class="review-text">“Optix saved us hours every week on lead follow-ups. We used to lose enquiries by responding too slow — now it's instant, automatic, and we've doubled our conversion rate.”</p>
             <div class="review-author">
               <div class="review-avatar">JM</div>
               <div>
@@ -245,7 +266,7 @@
           </div>
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">"Our onboarding used to take 3 days of back and forth. Optix built us an automated workflow that handles it in 20 minutes. The ROI was obvious within the first week."</p>
+            <p class="review-text">“Our onboarding used to take 3 days of back and forth. Optix built us an automated workflow that handles it in 20 minutes. The ROI was obvious within the first week.”</p>
             <div class="review-author">
               <div class="review-avatar">SR</div>
               <div>
@@ -260,7 +281,7 @@
           </div>
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">"I was skeptical AI automation would actually work for a physio clinic. Optix proved me wrong — appointment reminders alone cut our no-show rate by 40%. Couldn't be happier."</p>
+            <p class="review-text">“I was skeptical AI automation would actually work for a physio clinic. Optix proved me wrong — appointment reminders alone cut our no-show rate by 40%. Couldn't be happier.”</p>
             <div class="review-author">
               <div class="review-avatar">DK</div>
               <div>
@@ -275,7 +296,7 @@
           </div>
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">"We were drowning in admin. Optix automated our quoting, invoicing follow-ups, and job scheduling. My team now focuses on actual work instead of chasing paperwork."</p>
+            <p class="review-text">“We were drowning in admin. Optix automated our quoting, invoicing follow-ups, and job scheduling. My team now focuses on actual work instead of chasing paperwork.”</p>
             <div class="review-author">
               <div class="review-avatar">TW</div>
               <div>
@@ -290,7 +311,7 @@
           </div>
           <div class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">"The discovery call alone was worth it. They identified three automations we'd never thought of and the first one paid for itself in the first month. Highly recommend."</p>
+            <p class="review-text">“The discovery call alone was worth it. They identified three automations we'd never thought of and the first one paid for itself in the first month. Highly recommend.”</p>
             <div class="review-author">
               <div class="review-avatar">AL</div>
               <div>
@@ -312,8 +333,6 @@
       </div>
     </div>
   </section>
-
-  <!-- FOOTER -->
 
   <!-- CONTACT FORM -->
   <section class="section" id="contact-form">
@@ -346,12 +365,12 @@
           <label>Industry</label>
           <select required>
             <option value="" disabled selected>Select your industry</option>
-            <option>Trades & Construction</option>
+            <option>Trades &amp; Construction</option>
             <option>Real Estate</option>
             <option>Allied Health</option>
-            <option>Hospitality & Tourism</option>
+            <option>Hospitality &amp; Tourism</option>
             <option>Professional Services</option>
-            <option>Retail & eCommerce</option>
+            <option>Retail &amp; eCommerce</option>
             <option>Other</option>
           </select>
         </div>
@@ -366,7 +385,7 @@
   </section>
 
   <!-- FOOTER -->
-
+  <footer>
     <div class="footer-inner">
       <span class="logo">Optix</span>
       <p>Gold Coast, Queensland · Australia</p>
