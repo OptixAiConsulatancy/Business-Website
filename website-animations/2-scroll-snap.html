@@ -7,16 +7,15 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #000; font-family: 'Inter', sans-serif; overflow: hidden; }
+
   .container {
     height: 100vh;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
   }
   .container::-webkit-scrollbar { display: none; }
+
   .section {
     height: 100vh;
-    scroll-snap-align: start;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,24 +24,78 @@
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(40px) scale(0.97);
-    transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1), filter 0.8s;
-    filter: blur(4px);
+    transform: translateY(20px) scale(0.99);
+    transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: blur(2px);
   }
-  .section.visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+
   .section:nth-child(1) { background: radial-gradient(ellipse at 50% 0%, #1a0533 0%, #000 70%); }
   .section:nth-child(2) { background: radial-gradient(ellipse at 50% 0%, #001a33 0%, #000 70%); }
   .section:nth-child(3) { background: radial-gradient(ellipse at 50% 0%, #001a1a 0%, #000 70%); }
   .section:nth-child(4) { background: radial-gradient(ellipse at 50% 0%, #1a1a00 0%, #000 70%); }
-  .label { color: rgba(255,255,255,0.35); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
-  h2 { color: #fff; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; letter-spacing: -0.03em; text-align: center; line-height: 1.1; }
+
+  .label {
+    color: rgba(255,255,255,0.35);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  h2 {
+    color: #fff;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-align: center;
+    line-height: 1.1;
+  }
   .accent { color: #7c6dfa; }
-  p.desc { color: rgba(255,255,255,0.4); font-size: 1.1rem; text-align: center; max-width: 500px; line-height: 1.7; }
-  .dots { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.75rem; z-index: 100; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: background 0.3s, transform 0.3s; }
+  p.desc {
+    color: rgba(255,255,255,0.4);
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 500px;
+    line-height: 1.7;
+  }
+
+  .dots {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 100;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
   .dot.active { background: #7c6dfa; transform: scale(1.4); box-shadow: 0 0 10px #7c6dfa; }
-  .hint { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.3); font-size: 0.8rem; letter-spacing: 0.1em; animation: bounce 2s infinite; }
-  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-6px); } }
+
+  .hint {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.3);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-6px); }
+  }
   .back { position: fixed; top: 1.5rem; left: 1.5rem; color: rgba(255,255,255,0.3); font-size: 0.82rem; text-decoration: none; letter-spacing: 0.06em; z-index: 200; }
   .back:hover { color: #fff; }
 </style>
@@ -50,6 +103,7 @@
 <body>
 <script>if (sessionStorage.getItem('anim_auth') !== '1485') { location.href = 'index.html'; }</script>
 <a class="back" href="index.html">← Back</a>
+
 <div class="container" id="container">
   <section class="section">
     <p class="label">Automately · Gold Coast</p>
@@ -72,29 +126,64 @@
     <p class="desc">Book a free 30-minute discovery call. No obligation.</p>
   </section>
 </div>
+
 <div class="dots" id="dots">
   <div class="dot active" onclick="goTo(0)"></div>
   <div class="dot" onclick="goTo(1)"></div>
   <div class="dot" onclick="goTo(2)"></div>
   <div class="dot" onclick="goTo(3)"></div>
 </div>
+
 <p class="hint">↓ scroll</p>
+
 <script>
   const sections = document.querySelectorAll('.section');
   const dots = document.querySelectorAll('.dot');
   const container = document.getElementById('container');
-  function goTo(i) { sections[i].scrollIntoView({ behavior: 'smooth' }); }
+  let current = 0;
+  let isScrolling = false;
+
+  function ease(t) {
+    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+  }
+
+  function goTo(index) {
+    if (isScrolling || index < 0 || index >= sections.length) return;
+    isScrolling = true;
+    current = index;
+    const start = container.scrollTop;
+    const target = sections[index].offsetTop;
+    const distance = target - start;
+    const duration = 950;
+    let startTime = null;
+
+    function animate(ts) {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      container.scrollTop = start + distance * ease(progress);
+      if (progress < 1) requestAnimationFrame(animate);
+      else isScrolling = false;
+    }
+    requestAnimationFrame(animate);
+    dots.forEach(d => d.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
+
+  container.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (isScrolling) return;
+    if (e.deltaY > 0) goTo(current + 1);
+    else goTo(current - 1);
+  }, { passive: false });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        const i = Array.from(sections).indexOf(entry.target);
-        dots.forEach(d => d.classList.remove('active'));
-        dots[i].classList.add('active');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-  }, { threshold: 0.5, root: container });
+  }, { threshold: 0.4, root: container });
+
   sections.forEach(s => observer.observe(s));
+  setTimeout(() => sections[0].classList.add('visible'), 100);
 </script>
 </body>
 </html>
