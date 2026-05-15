@@ -93,15 +93,17 @@
       transition: width 0.38s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       background: #111114;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      border-right: 1px solid rgba(255,255,255,0.07);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-top: 1px solid transparent;
+      border-right: 1px solid transparent;
+      border-bottom: 1px solid transparent;
       border-left: none;
       border-radius: 0 16px 16px 0;
-      box-shadow: 6px 0 40px rgba(0,0,0,0.55);
+      box-shadow: none;
     }
     #optix-panel.open {
       width: 320px;
+      border-color: rgba(255,255,255,0.07);
+      box-shadow: 6px 0 40px rgba(0,0,0,0.55);
     }
 
     .optix-inner {
