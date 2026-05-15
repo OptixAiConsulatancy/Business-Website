@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>4 — Bold Typography Transition</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #000;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    width: 100vw; height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .word-row {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+
+  .word {
+    font-size: clamp(3rem, 9vw, 8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+  }
+
+  .scene-1 .word { color: #fff; }
+  .scene-1 .word.accent { color: #7c6dfa; }
+  .scene-2 .word { color: #fff; }
+  .scene-2 .word.accent { color: #60a5fa; }
+
+  .sub-text {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  /* Animate in */
+  @keyframes slideUp {
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fadeUp {
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slideOut {
+    to { transform: translateY(-110%) translateZ(-100px); opacity: 0; filter: blur(4px); }
+  }
+  @keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-20px); }
+  }
+
+  .scene-1.enter .word { animation: slideUp 0.7s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .scene-1.enter .sub-text { animation: fadeUp 0.7s 0.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .scene-1.enter .word:nth-child(1) { animation-delay: 0s; }
+  .scene-1.enter .word-row:nth-child(2) .word { animation-delay: 0.08s; }
+  .scene-1.enter .word-row:nth-child(3) .word { animation-delay: 0.16s; }
+
+  .scene-1.exit .word { animation: slideOut 0.6s cubic-bezier(0.4,0,0.8,1) forwards; }
+  .scene-1.exit .sub-text { animation: fadeOut 0.4s cubic-bezier(0.4,0,0.8,1) forwards; }
+
+  .scene-2.enter .word { animation: slideUp 0.7s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .scene-2.enter .sub-text { animation: fadeUp 0.7s 0.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .scene-2.enter .word-row:nth-child(1) .word { animation-delay: 0.1s; }
+  .scene-2.enter .word-row:nth-child(2) .word { animation-delay: 0.2s; }
+  .scene-2.enter .word-row:nth-child(3) .word { animation-delay: 0.3s; }
+
+  .scene-2 { z-index: 1; }
+  .scene-1 { z-index: 2; }
+
+  .glow {
+    position: fixed;
+    width: 500px; height: 300px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .glow-1 { background: radial-gradient(ellipse, rgba(124,109,250,0.08) 0%, transparent 70%); }
+  .glow-2 { background: radial-gradient(ellipse, rgba(96,165,250,0.08) 0%, transparent 70%); }
+
+  .btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    padding: 0.65rem 2rem;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    transition: background 0.2s;
+  }
+  .btn:hover { background: rgba(255,255,255,0.12); }
+</style>
+</head>
+<body>
+
+<div class="glow glow-1" id="glow"></div>
+
+<div class="scene scene-1 enter" id="scene1">
+  <div class="word-row"><span class="word">Your</span></div>
+  <div class="word-row"><span class="word accent">Business</span></div>
+  <div class="word-row"><span class="word">Runs Itself.</span></div>
+  <p class="sub-text">Automately · Gold Coast · AI Automation</p>
+</div>
+
+<div class="scene scene-2" id="scene2">
+  <div class="word-row"><span class="word">What</span></div>
+  <div class="word-row"><span class="word accent">We</span></div>
+  <div class="word-row"><span class="word">Build.</span></div>
+  <p class="sub-text">Services · Automations · Results</p>
+</div>
+
+<button class="btn" id="btn">Play Transition →</button>
+
+<script>
+  const s1 = document.getElementById('scene1');
+  const s2 = document.getElementById('scene2');
+  const glow = document.getElementById('glow');
+  const btn = document.getElementById('btn');
+  let showing = 1;
+
+  btn.addEventListener('click', () => {
+    if (showing === 1) {
+      s1.classList.remove('enter');
+      s1.classList.add('exit');
+      setTimeout(() => {
+        s1.style.zIndex = 1;
+        s2.style.zIndex = 2;
+        glow.className = 'glow glow-2';
+        s2.classList.add('enter');
+        showing = 2;
+        btn.textContent = 'Reset ↺';
+      }, 500);
+    } else {
+      s1.classList.remove('exit');
+      s2.classList.remove('enter');
+      s1.style.zIndex = 2;
+      s2.style.zIndex = 1;
+      glow.className = 'glow glow-1';
+      void s1.offsetWidth;
+      s1.classList.add('enter');
+      showing = 1;
+      btn.textContent = 'Play Transition →';
+    }
+  });
+</script>
+</body>
+</html>
