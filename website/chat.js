@@ -60,7 +60,7 @@
   let isOpen = false;
   let loading = false;
 
-  const WELCOME = "G'day! 👋 I'm the Automately AI. I help Gold Coast businesses save hours every week with smart automation. What does your business do?";
+  const WELCOME = "G'day! 👋 I'm the Optix AI. I help Gold Coast businesses save hours every week with smart automation. What does your business do?";
 
   toggle.addEventListener('click', () => {
     isOpen = !isOpen;
@@ -185,7 +185,7 @@
       saveHistory(history);
     } catch {
       removeTyping();
-      renderMessage('assistant', "Sorry, I'm having a moment. Try again or email us at hello@automately.com.au");
+      renderMessage('assistant', "Sorry, I'm having a moment. Try again or email us at optixai01@gmail.com");
     }
 
     loading = false;
