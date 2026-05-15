@@ -34,6 +34,14 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method not allowed' };
   }
 
+  if (!process.env.OPENAI_API_KEY) {
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'OpenAI API key not configured.' })
+    };
+  }
+
   try {
     const { messages } = JSON.parse(event.body);
 
@@ -55,6 +63,17 @@ exports.handler = async (event) => {
     });
 
     const data = await response.json();
+
+    if (!response.ok) {
+      const errMsg = data?.error?.message || `OpenAI error ${response.status}`;
+      console.error('OpenAI API error:', errMsg);
+      return {
+        statusCode: 502,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `AI error: ${errMsg}` })
+      };
+    }
+
     const content = data.choices?.[0]?.message?.content || "Sorry, I couldn't respond. Please try again.";
 
     return {
@@ -62,10 +81,12 @@ exports.handler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: content })
     };
-  } catch {
+  } catch (err) {
+    console.error('Function error:', err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: 'Connection error. Please try again.' })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `Connection error: ${err.message}` })
     };
   }
 };
