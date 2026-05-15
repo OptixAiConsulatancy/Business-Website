@@ -396,9 +396,12 @@
     let leadData = null;
 
     if (text.includes('QUALIFIED_LEAD')) {
-      const match = text.match(/LEAD_DATA:(\{.*?\})/s);
+      const match = text.match(/LEAD_DATA:\s*(\{[\s\S]*?\})/);
       if (match) { try { leadData = JSON.parse(match[1]); } catch {} }
-      text = text.replace(/QUALIFIED_LEAD\n?/, '').replace(/LEAD_DATA:\{.*?\}\n?/s, '').trim();
+      text = text
+        .replace(/QUALIFIED_LEAD/g, '')
+        .replace(/LEAD_DATA:\s*\{[\s\S]*?\}/g, '')
+        .trim();
     }
 
     if (text) {
