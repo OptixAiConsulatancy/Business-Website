@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>1 — Cinematic Zoom Transition</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #000; font-family: 'Inter', sans-serif; overflow: hidden; width: 100vw; height: 100vh; }
+
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .scene-1 {
+    background: radial-gradient(ellipse at center, #1a0533 0%, #000 70%);
+    z-index: 2;
+  }
+  .scene-2 {
+    background: radial-gradient(ellipse at center, #001a33 0%, #000 70%);
+    z-index: 1;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-align: center;
+  }
+  .sub {
+    color: rgba(255,255,255,0.4);
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    background: #7c6dfa;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #7c6dfa;
+  }
+
+  .scene-1 h1 { color: #fff; }
+  .scene-2 h1 { color: #60a5fa; }
+
+  @keyframes zoomIn {
+    0%   { transform: scale(1); filter: blur(0px); opacity: 1; }
+    70%  { transform: scale(4); filter: blur(8px); opacity: 0.6; }
+    100% { transform: scale(8); filter: blur(20px); opacity: 0; }
+  }
+  @keyframes fadeInScene2 {
+    0%   { opacity: 0; transform: scale(0.3); filter: blur(20px); }
+    40%  { opacity: 0; }
+    100% { opacity: 1; transform: scale(1); filter: blur(0px); }
+  }
+
+  .scene-1.animate { animation: zoomIn 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .scene-2.animate { animation: fadeInScene2 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+  .btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    transition: background 0.2s;
+  }
+  .btn:hover { background: rgba(255,255,255,0.15); }
+
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(124,109,250,0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div class="scene scene-2" id="scene2">
+  <div class="bg-grid"></div>
+  <div class="dot"></div>
+  <p class="sub">Next Page</p>
+  <h1>What We Build</h1>
+  <p class="sub">AI Automation Agency</p>
+</div>
+<div class="scene scene-1" id="scene1">
+  <div class="bg-grid"></div>
+  <div class="dot"></div>
+  <p class="sub">Automately</p>
+  <h1>Your Business<br/>Runs Itself.</h1>
+  <p class="sub">Gold Coast · Australia</p>
+</div>
+<button class="btn" id="btn">Play Transition →</button>
+<script>
+  let played = false;
+  document.getElementById('btn').addEventListener('click', function() {
+    if (played) {
+      document.getElementById('scene1').classList.remove('animate');
+      document.getElementById('scene2').classList.remove('animate');
+      void document.getElementById('scene1').offsetWidth;
+      played = false;
+      this.textContent = 'Play Transition →';
+      return;
+    }
+    document.getElementById('scene1').classList.add('animate');
+    document.getElementById('scene2').classList.add('animate');
+    played = true;
+    this.textContent = 'Reset';
+  });
+</script>
+</body>
+</html>

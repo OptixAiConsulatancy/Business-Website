@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Animation Previews — Automately</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #080808; font-family: 'Inter', sans-serif; color: #f0f0f0; padding: 4rem 2rem; }
+  h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+  .sub { color: #888; margin-bottom: 3rem; font-size: 0.95rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; max-width: 1000px; }
+  a.card {
+    background: #141414;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+    display: block;
+  }
+  a.card:hover { border-color: rgba(124,109,250,0.4); transform: translateY(-2px); }
+  .num { font-size: 0.72rem; font-weight: 700; color: #7c6dfa; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+  h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  p { font-size: 0.85rem; color: #888; line-height: 1.6; }
+</style>
+</head>
+<body>
+<h1>Animation Previews</h1>
+<p class="sub">Click any card to preview the animation. Tell me which ones you want on your website.</p>
+<div class="grid">
+  <a class="card" href="1-cinematic-zoom.html" target="_blank">
+    <div class="num">01</div>
+    <h3>Cinematic Zoom</h3>
+    <p>Apple-style zoom transition between pages with blur and depth.</p>
+  </a>
+  <a class="card" href="2-scroll-snap.html" target="_blank">
+    <div class="num">02</div>
+    <h3>Smooth Scroll Snap</h3>
+    <p>Full-screen sections that snap into place with blur and scale effects.</p>
+  </a>
+  <a class="card" href="3-3d-cards.html" target="_blank">
+    <div class="num">03</div>
+    <h3>3D Floating Cards</h3>
+    <p>Cards in 3D space with depth, rotation, and smooth camera movement.</p>
+  </a>
+  <a class="card" href="4-typography.html" target="_blank">
+    <div class="num">04</div>
+    <h3>Bold Typography</h3>
+    <p>Large text slides up staggered, then pushes back in 3D on exit.</p>
+  </a>
+  <a class="card" href="5-neon-wipe.html" target="_blank">
+    <div class="num">05</div>
+    <h3>Neon Geometric Wipe</h3>
+    <p>Glowing neon slashes wipe diagonally across the screen between scenes.</p>
+  </a>
+  <a class="card" href="6-floating-ui.html" target="_blank">
+    <div class="num">06</div>
+    <h3>Floating UI Orbit</h3>
+    <p>3D UI panels orbiting in space with particles. Hover to pause.</p>
+  </a>
+</div>
+</body>
+</html>
