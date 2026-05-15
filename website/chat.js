@@ -1,6 +1,6 @@
 (function () {
   const CALENDLY_URL = 'https://calendly.com/optixai01/30min';
-  const STORAGE_KEY = 'automately_chat';
+  const STORAGE_KEY = 'optix_chat';
 
   function loadHistory() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
@@ -24,7 +24,7 @@
       <div class="chat-header">
         <div class="chat-avatar">AI</div>
         <div>
-          <div class="chat-name">Automately AI</div>
+          <div class="chat-name">Optix AI</div>
           <div class="chat-status">● Online · replies instantly</div>
         </div>
       </div>
