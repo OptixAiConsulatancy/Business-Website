@@ -90,20 +90,24 @@
       width: 0;
       height: 520px;
       overflow: hidden;
-      transition: width 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: width 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                  background 0s 0.38s;
       display: flex;
-      background: #111114;
-      border-top: 1px solid transparent;
-      border-right: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      border-left: none;
+      background: transparent;
+      border: none;
       border-radius: 0 16px 16px 0;
       box-shadow: none;
     }
     #optix-panel.open {
       width: 320px;
-      border-color: rgba(255,255,255,0.07);
+      background: #111114;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      border-right: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-left: none;
       box-shadow: 6px 0 40px rgba(0,0,0,0.55);
+      transition: width 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                  background 0s 0s;
     }
 
     .optix-inner {
