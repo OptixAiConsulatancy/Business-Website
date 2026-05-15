@@ -6,13 +6,7 @@
 <title>Animation Previews — Automately</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #080808;
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    padding: 3rem 2rem;
-    color: #fff;
-  }
+  body { background: #080808; font-family: 'Inter', sans-serif; min-height: 100vh; padding: 3rem 2rem; color: #fff; }
   h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
   .sub { color: rgba(255,255,255,0.35); font-size: 0.9rem; margin-bottom: 3rem; letter-spacing: 0.05em; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1100px; }
@@ -30,18 +24,15 @@
 </style>
 </head>
 <body>
-
 <div id="gate">
   <h2>Enter Password</h2>
   <input type="password" id="pw" placeholder="••••" />
   <button onclick="check()">Unlock</button>
   <p class="err" id="err">Wrong password.</p>
 </div>
-
 <div id="content" style="display:none">
 <h1>Animation Previews</h1>
 <p class="sub">Click any card to preview — choose what you want on the website</p>
-
 <div class="grid">
   <a class="card" href="1-cinematic-zoom.html"><div class="num">01</div><h2>Cinematic Zoom</h2><p>Apple-style zoom with blur. Scene zooms out and fades as the next zooms in.</p><span class="tag">Click to preview →</span></a>
   <a class="card" href="2-scroll-snap.html"><div class="num">02</div><h2>Scroll Snap Sections</h2><p>Each section glides into place with a long smooth fade reveal on scroll.</p><span class="tag">Click to preview →</span></a>
@@ -50,9 +41,9 @@
   <a class="card" href="5-neon-wipe.html"><div class="num">05</div><h2>Neon Wipe</h2><p>Three neon diagonal slashes wipe across the screen to reveal a new scene.</p><span class="tag">Click to preview →</span></a>
   <a class="card" href="6-floating-ui.html"><div class="num">06</div><h2>Orbiting UI Panels</h2><p>3D UI panels slowly orbit in space. Hover to pause. Shows your services.</p><span class="tag">Click to preview →</span></a>
   <a class="card" href="7-container-scroll.html"><div class="num">07</div><h2>Container Scroll</h2><p>Title floats up as a dashboard card tilts from 3D perspective into flat view on scroll.</p><span class="tag">Click to preview →</span></a>
+  <a class="card" href="8-shader-hero.html"><div class="num">08</div><h2>Shader Hero</h2><p>Live WebGL fire/nebula shader background with animated gradient headline and buttons. Move your mouse to interact.</p><span class="tag">Click to preview →</span></a>
 </div>
 </div>
-
 <script>
   const PW = '1485';
   function check() {
