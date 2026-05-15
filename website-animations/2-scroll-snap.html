@@ -11,14 +11,11 @@
   .container {
     height: 100vh;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
   }
   .container::-webkit-scrollbar { display: none; }
 
   .section {
     height: 100vh;
-    scroll-snap-align: start;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,9 +24,9 @@
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(40px) scale(0.97);
-    transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1), filter 0.8s;
-    filter: blur(4px);
+    transform: translateY(20px) scale(0.99);
+    transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: blur(2px);
   }
   .section.visible {
     opacity: 1;
@@ -129,10 +126,10 @@
 </div>
 
 <div class="dots" id="dots">
-  <div class="dot active" onclick="scrollTo(0)"></div>
-  <div class="dot" onclick="scrollTo(1)"></div>
-  <div class="dot" onclick="scrollTo(2)"></div>
-  <div class="dot" onclick="scrollTo(3)"></div>
+  <div class="dot active" onclick="goTo(0)"></div>
+  <div class="dot" onclick="goTo(1)"></div>
+  <div class="dot" onclick="goTo(2)"></div>
+  <div class="dot" onclick="goTo(3)"></div>
 </div>
 
 <p class="hint">↓ scroll</p>
@@ -141,23 +138,53 @@
   const sections = document.querySelectorAll('.section');
   const dots = document.querySelectorAll('.dot');
   const container = document.getElementById('container');
+  let current = 0;
+  let isScrolling = false;
 
-  function scrollTo(i) {
-    sections[i].scrollIntoView({ behavior: 'smooth' });
+  function ease(t) {
+    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
   }
 
+  function goTo(index) {
+    if (isScrolling || index < 0 || index >= sections.length) return;
+    isScrolling = true;
+    current = index;
+    const start = container.scrollTop;
+    const target = sections[index].offsetTop;
+    const distance = target - start;
+    const duration = 950;
+    let startTime = null;
+
+    function animate(ts) {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      container.scrollTop = start + distance * ease(progress);
+      if (progress < 1) requestAnimationFrame(animate);
+      else isScrolling = false;
+    }
+    requestAnimationFrame(animate);
+    dots.forEach(d => d.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
+
+  container.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (isScrolling) return;
+    if (e.deltaY > 0) goTo(current + 1);
+    else goTo(current - 1);
+  }, { passive: false });
+
+  // reveal sections as they come into view
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        const i = Array.from(sections).indexOf(entry.target);
-        dots.forEach(d => d.classList.remove('active'));
-        dots[i].classList.add('active');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-  }, { threshold: 0.5, root: container });
+  }, { threshold: 0.4, root: container });
 
   sections.forEach(s => observer.observe(s));
+
+  // reveal first section on load
+  setTimeout(() => sections[0].classList.add('visible'), 100);
 </script>
 </body>
 </html>
