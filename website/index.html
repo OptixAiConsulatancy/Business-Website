@@ -236,17 +236,19 @@
       <p class="label">Get in touch</p>
       <h2>Tell us about your business</h2>
       <p class="hero-sub" style="text-align:left;margin:0 0 2.5rem;">Fill out the form below and we'll get back to you within 24 hours.</p>
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <input name="bot-field" hidden />
         <div class="form-row">
-          <div class="form-group"><label>Full name</label><input type="text" placeholder="John Smith" required /></div>
-          <div class="form-group"><label>Business name</label><input type="text" placeholder="Smith Plumbing Co." required /></div>
+          <div class="form-group"><label>Full name</label><input type="text" name="full-name" placeholder="John Smith" required /></div>
+          <div class="form-group"><label>Business name</label><input type="text" name="business-name" placeholder="Smith Plumbing Co." required /></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>Email address</label><input type="email" placeholder="john@smithplumbing.com.au" required /></div>
-          <div class="form-group"><label>Phone number</label><input type="tel" placeholder="04XX XXX XXX" /></div>
+          <div class="form-group"><label>Email address</label><input type="email" name="email" placeholder="john@smithplumbing.com.au" required /></div>
+          <div class="form-group"><label>Phone number</label><input type="tel" name="phone" placeholder="04XX XXX XXX" /></div>
         </div>
-        <div class="form-group"><label>Industry</label><select required><option value="" disabled selected>Select your industry</option><option>Trades &amp; Construction</option><option>Real Estate</option><option>Allied Health</option><option>Hospitality &amp; Tourism</option><option>Professional Services</option><option>Retail &amp; eCommerce</option><option>Other</option></select></div>
-        <div class="form-group"><label>What's your biggest time waster right now?</label><textarea placeholder="e.g. chasing leads, manually entering data, following up on invoices..." rows="4" required></textarea></div>
+        <div class="form-group"><label>Industry</label><select name="industry" required><option value="" disabled selected>Select your industry</option><option>Trades &amp; Construction</option><option>Real Estate</option><option>Allied Health</option><option>Hospitality &amp; Tourism</option><option>Professional Services</option><option>Retail &amp; eCommerce</option><option>Other</option></select></div>
+        <div class="form-group"><label>What's your biggest time waster right now?</label><textarea name="time-waster" placeholder="e.g. chasing leads, manually entering data, following up on invoices..." rows="4" required></textarea></div>
         <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:1rem;padding:1rem;">Book a free discovery call →</button>
         <p class="form-note">No spam. We'll only use your details to get back to you about your enquiry.</p>
       </form>
